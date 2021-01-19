@@ -36,7 +36,7 @@ switch ($action) {
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>Host/Servidor</label>
+						<label>Host/Servidor<span class="text-danger">*</span></label>
 						<input type="text" value="<?php echo $response['host']; ?>" name="host" class="form-control" placeholder="Introduzir Host/Servidor" required>
 					</div>
 					<div class="form-group">

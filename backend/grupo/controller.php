@@ -91,15 +91,15 @@
 			<form name='register'>
 	            <div class="card-body">
 	              <div class="form-group">
-	                <label>Nome</label>
+	                <label>Nome<span class="text-danger">*</span></label>
 	                <input type="text" class="form-control" name="nome" placeholder="Inserir Nome" required>
 	              </div>
 	              <div class="form-group">
-	                <label>Local</label>
+	                <label>Local<span class="text-danger">*</span></label>
 	                <input type="text" class="form-control" name="local" placeholder="Inserir Local" required>
 	              </div>
 	              <div class="form-group">
-	                <label>Descrição</label>
+	                <label>Descrição<span class="text-danger">*</span></label>
 	                <input type="text" class="form-control" name="descricao" placeholder="Inserir Descrição" not required>
 	              </div>
 	            </div>
@@ -138,15 +138,15 @@
 			<form name='edit'>
 	            <div class="card-body">
 	              <div class="form-group">
-	                <label>Nome</label>
+	                <label>Nome<span class="text-danger">*</span></label>
 	                <input type="text" class="form-control" value="<?php echo $response['nome']?>" name="nome" placeholder="Inserir Nome" required>
 	              </div>
 	              <div class="form-group">
-	                <label>Local</label>
+	                <label>Local<span class="text-danger">*</span></label>
 	                <input type="text" class="form-control" value="<?php echo $response['local']?>" name="local" placeholder="Inserir Local" required>
 	              </div>
 	              <div class="form-group">
-	                <label>Descrição</label>
+	                <label>Descrição<span class="text-danger">*</span></label>
 	                <input type="text" class="form-control" value="<?php echo $response['descricao']?>" name="descricao" placeholder="Inserir Descrição" not required>
 	              </div>
 	            </div>
@@ -204,7 +204,7 @@
 			<div class="retorno"></div>
 			<form name='registerUser'>
 	            <div class="form-group">
-	                <label>Nome utilizador</label>
+	                <label>Nome utilizador<span class="text-danger">*</span></label>
 	                <select class="form-control" name="id_utilizador" required>
 	                	<option>Selecione</option>
 	                	<?php 

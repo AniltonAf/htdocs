@@ -72,8 +72,6 @@ class geradorAPI extends DbConnection
                         $this->historial_alertas($user_send, $tipo, $menssagem, $status, $menssage, $codigo);
                     }
 
-
-
                     $response = send_email($this->users, $assunto, $messagem_email);
                     //dados para tabela Historico_alertas email
                     if ($response['status']) {
@@ -116,8 +114,6 @@ class geradorAPI extends DbConnection
                         $this->historial_alertas($user_send, $tipo, $menssagem, $status, $menssage, $codigo);
                     }
                     //dados para tabela Historico_alertas sms                     
-
-
 
                     $response = send_email($this->users, $assunto, $messagem_email);
                     //dados para tabela Historico_alertas email 

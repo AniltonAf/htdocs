@@ -71,19 +71,19 @@
 			                </center>
 			            </div>
 						<div class="form-group">
-			                <label>Usernamne</label>
+			                <label>Usernamne<span class="text-danger">*</span></label>
 			                <input type="text" class="form-control" name="username" placeholder="Inserir Username" required>
 			            </div>
 			            <div class="form-group">
-			                <label>Password</label>
+			                <label>Password<span class="text-danger">*</span></label>
 			                <input type="password" class="form-control" name="password" placeholder="Inserir password" required>
 			            </div>
 			            <div class="form-group">
-			                <label>Confirmar Password</label>
+			                <label>Confirmar Password<span class="text-danger">*</span></label>
 			                <input type="password" class="form-control" name="confirmar_password" placeholder="Confirmar password" required>
 			            </div>
 			            <div class="form-group">
-			                <label>Perfil Utilizador</label>
+			                <label>Perfil Utilizador<span class="text-danger">*</span></label>
 			                <select class="form-control" name="id_perfil_permission">
 			                	<option>Selecione</option>
 			                	<?php		                		
@@ -98,27 +98,27 @@
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-			                <label>Nome</label>
+			                <label>Nome<span class="text-danger">*</span></label>
 			                <input type="text" class="form-control" name="nome" placeholder="Inserir nome" required>
 			            </div>
 			            <div class="form-group">
-			                <label>Numero Funcionario</label>
+			                <label>Numero Funcionario<span class="text-danger">*</span></label>
 			                <input type="text" class="form-control" name="numero_funcionario" placeholder="Inserir numero funcionario" required>
 			            </div>
 			            <div class="form-group">
-			                <label>Departamento</label>
+			                <label>Departamento<span class="text-danger">*</span></label>
 			                <input type="text" class="form-control" name="departamento" placeholder="Inserir departamento" required>
 			            </div>
 			            <div class="form-group">
-			                <label>Função</label>
+			                <label>Função<span class="text-danger">*</span></label>
 			                <input type="text" class="form-control" name="funcao" placeholder="Inserir função" required>
 			            <div class="form-group">
-							<label>E-mail</label>
+							<label>E-mail<span class="text-danger">*</span></label>
 							<label><input type="checkbox" name="alerta_email"> Ativar envio de E-MAIL </label>
 			                <input type="email" class="form-control" name="email" placeholder="Inserir e-mail" required>
 			            </div>
 			            <div class="form-group">
-							<label>Telefone</label>
+							<label>Telefone<span class="text-danger">*</span></label>
 							<label><input type="checkbox" name="alerta_sms"> Ativar envio de SMS </label>
 			                <input type="text" class="form-control" name="telefone" placeholder="Inserir telefone" required>
 						</div>
@@ -191,7 +191,7 @@
 			                </center>
 			            </div>
 			            <div class="form-group">
-			                <label>Perfil Utilizador</label>
+			                <label>Perfil Utilizador<span class="text-danger">*</span></label>
 			                <select class="form-control" name="id_perfil_permission">
 			                	<option>Selecione</option>
 			                	<?php		                		
@@ -205,36 +205,38 @@
 			                </select>
 			            </div>
 						<div class="checkbox">
-							<label>
-								<input type="checkbox" <?php echo $response['alerta_email']? 'checked':''; ?> name="alerta_email"> E-MAIL
-							</label>
-							<label>
-								<input type="checkbox" <?php echo $response['alerta_sms']? 'checked':''; ?> name="alerta_sms"> SMS
-							</label>
+							
+							
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-			                <label>Nome</label>
+			                <label>Nome<span class="text-danger">*</span></label>
 			                <input type="text" class="form-control" value="<?php echo $response['nome']; ?>" name="nome" placeholder="Inserir nome" required>
 			            </div>
 			            <div class="form-group">
-			                <label>Numero Funcionario</label>
+			                <label>Numero Funcionario<span class="text-danger">*</span></label>
 			                <input type="text" class="form-control" value="<?php echo $response['numero_funcionario']; ?>" name="numero_funcionario" placeholder="Inserir numero funcionario" required>
 			            </div>
 			            <div class="form-group">
-			                <label>Departamento</label>
+			                <label>Departamento<span class="text-danger">*</span></label>
 			                <input type="text" class="form-control" value="<?php echo $response['departamento']; ?>" name="departamento" placeholder="Inserir departamento" required>
 			            </div>
 			            <div class="form-group">
-			                <label>Função</label>
+			                <label>Função<span class="text-danger">*</span></label>
 			                <input type="text" class="form-control" value="<?php echo $response['funcao']; ?>" name="funcao" placeholder="Inserir função" required>
 			            <div class="form-group">
-			                <label>E-mail</label>
+							<label>E-mail<span class="text-danger">*</span></label>
+							<label>
+								<input type="checkbox" <?php echo $response['alerta_email']? 'checked':''; ?> name="alerta_email"> E-MAIL
+							</label>
 			                <input type="text" class="form-control" value="<?php echo $response['email']; ?>" name="email" placeholder="Inserir e-mail" required>
 			            </div>
 			            <div class="form-group">
-			                <label>Telefone</label>
+							<label>Telefone<span class="text-danger">*</span></label>
+							<label>
+								<input type="checkbox" <?php echo $response['alerta_sms']? 'checked':''; ?> name="alerta_sms"> SMS
+							</label>
 			                <input type="text" class="form-control" value="<?php echo $response['telefone']; ?>" name="telefone" placeholder="Inserir telefone" required>
 						</div>
 

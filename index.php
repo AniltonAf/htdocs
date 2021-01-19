@@ -2,26 +2,7 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!--<div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Monitorização</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Gerador</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </div>-->
-  <!-- /.content-header -->
-
-  <!-- Main content -->
-
-  <section class="content"><br>
+    <section class="content"><br>
     <div class="container-fluid">
 
       <!-- ===============================================================================
@@ -141,7 +122,7 @@
             <div class="col-md-9">
               <div class="card card-outline card-primary">
                 <div class="card-header">
-                  <h5 class="card-title">Pontos dos Geradores</h5>
+                  <h5 class="card-title">Localização Geradores</h5>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus"></i>

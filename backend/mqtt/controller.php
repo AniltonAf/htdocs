@@ -22,11 +22,11 @@ switch ($action) {
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>Servidor</label>
+						<label>Servidor<span class="text-danger">*</span></label>
 						<input type="text" value="<?php echo $response['server_mqtt']; ?>" name="server_mqtt" class="form-control" placeholder="Introduzir endereço Servidor" required>
 					</div>
 					<div class="form-group">
-						<label>Id do Cliente</label>
+						<label>Id do Cliente<span class="text-danger">*</span></label>
 						<input type="text" value="<?php echo $response['id_cliente']; ?>" name="id_cliente" class="form-control" placeholder="Introduzir ID do cliente" required>
 					</div>
 					<div class="checkbox">
@@ -37,11 +37,11 @@ switch ($action) {
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>Porta WS</label>
+						<label>Porta WS<span class="text-danger">*</span></label>
 						<input type="number" value="<?php echo $response['port_ws']; ?>" name="port_ws" class="form-control" placeholder="Introduzir Porta WS" required>
 					</div>
 					<div class="form-group">
-						<label>Nome de utilizador</label>
+						<label>Nome de utilizador<span class="text-danger">*</span></label>
 						<input type="text" value="<?php echo $response['username']; ?>" name="username" class="form-control" placeholder="Introduzir Nome de utilizador" required>
 					</div>
 					<div class="checkbox">
@@ -52,11 +52,11 @@ switch ($action) {
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>Porta MQTT</label>
+						<label>Porta MQTT<span class="text-danger">*</span></label>
 						<input type="number" value="<?php echo $response['port_mqtt']; ?>" name="port_mqtt" class="form-control" placeholder="Introduzir Porta MQTT" required>
 					</div>
 					<div class="form-group">
-						<label>Palavra-passe</label>
+						<label>Palavra-passe<span class="text-danger">*</span></label>
 						<input type="password" value="<?php echo $response['password']; ?>" name="password" class="form-control" placeholder="Introduzir Palavra-passe" required>
 					</div>
 				</div>
