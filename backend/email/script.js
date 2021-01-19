@@ -21,7 +21,7 @@ $(document).ready(function () {
 		var button = form.find(':button');
 
 		if(btnClick==='btnGravar'){
-			$.ajax({
+				$.ajax({
 				url: controller_url,
 				type: 'POST',
 				data: 'action=update&' + form.serialize(),

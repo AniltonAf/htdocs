@@ -12,11 +12,14 @@ $(document).ready(function () {
 	setInterval(function(){
 		getAll();
 		
+		
 	},2000);
 	getMap();
 	
 	//getlast5();
 	initMqtt();
+
+
 
 
 	$('#modalAdd').on('click', '#btnAdd', function () {
@@ -91,35 +94,39 @@ $(document).ready(function () {
 
 							if(response.gerador_status==1){
 								new_message =  messageCorpo('Gerador ON',gerador.descricao,retorno.time,'success');
-
+								alertson();
 							} 
 
 							if(!response.rede_publica && !response.gerador_status && !response.power_edificio){
 								new_message = messageCorpo('Retorno de energia da rede, gerador OFF',gerador.descricao,retorno.time,'#808080');
-								
+								alertson();								
 							}
 
 							if(response.rede_publica && response.gerador_status && !response.power_edificio){
 								new_message =  messageCorpo('Corte de energia, gerador ON e agencia com energia',gerador.descricao,retorno.time,'success'); 
+								alertson();
 								
 							}
 
 							if(response.low_fuel){
 								new_message = messageCorpo('Gerdor com baixo nivel de combustivel',gerador.descricao,retorno.time,'danger');
+								alertson();
 
 							}
 
 							if(response.avariado){
 								new_message = messageCorpo('Gerdor alguma avaria não identificada',gerador.descricao,retorno.time,'danger'); 
+								alertson();
 							}
 
 							if(response.qua_aut_trans){
 								new_message = messageCorpo('Agencia sem energia e com avaria no QTA',gerador.descricao,retorno.time,'danger');
-
+								alertson();
 
 							
 							if(response.gerador_status==0){
 								new_message = messageCorpo('Gerador OFF',gerador.descricao,retorno.time,'#808080');
+								alertson();
 
 							}
 								
@@ -335,5 +342,11 @@ $(document).ready(function () {
 		return (Math.round((now - s) * multiplier) / multiplier) + ' ' + s;
 	}
 
+	// teste som
+	function alertson(){
+		var snd = new Audio('../dist/son/alert.mp3');    
+		snd .onended = function () { alert("Notificação recebida"); };
+		snd .play();
+	}
 
 });

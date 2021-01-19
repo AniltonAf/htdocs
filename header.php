@@ -14,7 +14,6 @@
   if(!isset($_SESSION['caixa_monitorizacao']))  header('Location: login.php');
 
 
-
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +25,7 @@
   <link rel="shortcut icon" href="dist/img/CaixaLogo.png" >
 
   <!-- MapBox  -->
-<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -218,7 +217,7 @@
               <p>
                 Reporte
                 <i class="right fas fa-angle-left"></i>
-                
+
               </p>
             </a>
             <ul class="nav nav-treeview">
