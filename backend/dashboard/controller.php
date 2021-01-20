@@ -28,12 +28,12 @@ switch ($action) {
 		break;
 
 	case 'get_gerador':
-		$id=filter_input(INPUT_POST,'id');
+		$id = filter_input(INPUT_POST, 'id');
 		$gerador = $data->getGerador($id);
 		$response = [
 			"status" => true,
 			"gerador" => $gerador,
-			"time"=>date('d/m H:i'),
+			"time" => date('d/m H:i'),
 		];
 
 		echo json_encode($response);
@@ -45,14 +45,19 @@ switch ($action) {
 		$dados = array();
 
 		foreach ($geradores as $line) {
+			$estado_icon = '';
 			if ($line["avariado"] == null) {
 				$estado = '<div class="badge badge-sm badge-warning">Não configurado</div>';
+				$estado_icon = 'warning';
 			} elseif ($line["avariado"] == 1) {
 				$estado = '<div class="badge badge-sm badge-danger">Avariado</div>';
+				$estado_icon = 'danger';
 			} elseif ($line["gerador_status"]) {
 				$estado = '<div class="badge badge-sm badge-success">Funcional</div>';
+				$estado_icon = 'success';
 			} else {
 				$estado = '<div class="badge badge-sm badge-info">Desligado</div>';
+				$estado_icon = 'info';
 			}
 			$dados[] = [
 				"type" => "Feature",
@@ -79,11 +84,13 @@ switch ($action) {
 							</table>
 
 						',
-					"icon" => "castle"
+					"id" => $line["gerador_id"],
+					"icon" => $estado_icon,
+					'iconSize' => [26, 26]
 				],
 				"geometry" => [
 					"type" => "Point",
-					"coordinates" => [$line["longitude"], $line["latitude"]]
+					"coordinates" => [(float)$line["longitude"], (float)$line["latitude"]]
 				]
 			];
 		}
@@ -97,12 +104,82 @@ switch ($action) {
 
 		break;
 
+	case 'get_geradorMarker': //apagar grupo
+		$gerador_id = filter_input(INPUT_POST, 'gerador_id');
+		$estado_marker = filter_input(INPUT_POST, 'estado');
+		$line = $data->getGerador($gerador_id);
+
+
+
+		
+		$estado_icon = '';
+		if ($line["avariado"] == null) {
+			$estado = '<div class="badge badge-sm badge-warning">Não configurado</div>';
+			$estado_icon = 'warning';
+		} elseif ($line["avariado"] == 1) {
+			$estado = '<div class="badge badge-sm badge-danger">Avariado</div>';
+			$estado_icon = 'danger';
+		} elseif ($line["gerador_status"]) {
+			$estado = '<div class="badge badge-sm badge-success">Funcional</div>';
+			$estado_icon = 'success';
+		} else {
+			$estado = '<div class="badge badge-sm badge-info">Desligado</div>';
+			$estado_icon = 'info';
+		}
+
+		if(strcmp($estado_icon,$estado_marker)==0){
+			$response=["status"=>false];
+		}else{
+			$dados = [
+				"type" => "Feature",
+				"properties" => [
+					"description" => '
+									<strong >' . $line["descricao"] . '</strong>
+									<table class="table table-sm table-striped" style="min-width: 200px;">
+										<tr>
+											<td>Fabricante</dh>
+											<td>' . $line["fabricante"] . '</td>
+										</tr>
+										<tr>
+											<td>Modelo</td>
+											<td>' . $line["modelo"] . '</td>
+										</tr>
+										<tr>
+											<td>Estado Gerador</td>
+											<td>' . $estado . '</td>
+										</tr>
+										<tr>
+											<td>Hora de Trabalho</td>
+											<td>' . $line["hora_trabalho"] . 'min</td>
+										</tr>
+									</table>
+		
+								',
+					"id" => $line["gerador_id"],
+					"icon" => $estado_icon,
+					'iconSize' => [26, 26]
+				],
+				"geometry" => [
+					"type" => "Point",
+					"coordinates" => [(float)$line["longitude"], (float)$line["latitude"]]
+				]
+			];
+
+			$response=["status"=>true,"data"=>$dados];
+		}
+
+		
+		echo json_encode($response);
+
+
+		break;
+
 	case 'get_server': //apagar grupo
-		$server = $data->getServer();	
+		$server = $data->getServer();
 
 		$response = [
 			"status" => true,
-			"server" => $server			
+			"server" => $server
 		];
 
 		echo json_encode($response);
@@ -111,7 +188,7 @@ switch ($action) {
 
 	case 'last5';
 		$response = $data->last5event();
-		
+
 		echo json_encode($response);
 
 		break;

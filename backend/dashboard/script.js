@@ -9,14 +9,18 @@ $(document).ready(function () {
 	var controller_url = "backend/dashboard/controller";
 
 	//listar items
-	setInterval(function(){
+	setInterval(function () {
 		getAll();
-		
-	},2000);
-	getMap();
-	
-	//getlast5();
+
+
+	}, 2000);
 	initMqtt();
+	getMap();
+
+	getlast5();
+
+
+
 
 
 	$('#modalAdd').on('click', '#btnAdd', function () {
@@ -70,59 +74,63 @@ $(document).ready(function () {
 					let old_message = corpo_message.html();
 
 					response = JSON.parse(message.payloadString)
-				
+
 
 
 					$.post(controller_url, { action: 'get_gerador', id: response.id_gerador }, function (res) {
 						let retorno = JSON.parse(res);
 
 
-						let status= response.servidor_status
+						let status = response.servidor_status
 
 
 						if (retorno.status && retorno.gerador) {
 							let gerador = retorno.gerador
-							
+
 							let new_message = '';
 
-							let message_corpo=false;
+							let message_corpo = false;
 
 							console.log(response)
 
-							if(response.gerador_status==1){
-								new_message =  messageCorpo('Gerador ON',gerador.descricao,retorno.time,'success');
-
-							} 
-
-							if(!response.rede_publica && !response.gerador_status && !response.power_edificio){
-								new_message = messageCorpo('Retorno de energia da rede, gerador OFF',gerador.descricao,retorno.time,'#808080');
-								
+							if (response.gerador_status == 1) {
+								new_message = messageCorpo('Gerador ON', gerador.descricao, retorno.time, 'success');
+								alertson();
 							}
 
-							if(response.rede_publica && response.gerador_status && !response.power_edificio){
-								new_message =  messageCorpo('Corte de energia, gerador ON e agencia com energia',gerador.descricao,retorno.time,'success'); 
-								
+							if (!response.rede_publica && !response.gerador_status && !response.power_edificio) {
+								new_message = messageCorpo('Retorno de energia da rede, gerador OFF', gerador.descricao, retorno.time, '#808080');
+								alertson();
 							}
 
-							if(response.low_fuel){
-								new_message = messageCorpo('Gerdor com baixo nivel de combustivel',gerador.descricao,retorno.time,'danger');
+							if (response.rede_publica && response.gerador_status && !response.power_edificio) {
+								new_message = messageCorpo('Corte de energia, gerador ON e agencia com energia', gerador.descricao, retorno.time, 'success');
+								alertson();
 
 							}
 
-							if(response.avariado){
-								new_message = messageCorpo('Gerdor alguma avaria não identificada',gerador.descricao,retorno.time,'danger'); 
-							}
-
-							if(response.qua_aut_trans){
-								new_message = messageCorpo('Agencia sem energia e com avaria no QTA',gerador.descricao,retorno.time,'danger');
-
-
-							
-							if(response.gerador_status==0){
-								new_message = messageCorpo('Gerador OFF',gerador.descricao,retorno.time,'#808080');
+							if (response.low_fuel) {
+								new_message = messageCorpo('Gerdor com baixo nivel de combustivel', gerador.descricao, retorno.time, 'danger');
+								alertson();
 
 							}
-								
+
+							if (response.avariado) {
+								new_message = messageCorpo('Gerdor alguma avaria não identificada', gerador.descricao, retorno.time, 'danger');
+								alertson();
+							}
+
+							if (response.qua_aut_trans) {
+								new_message = messageCorpo('Agencia sem energia e com avaria no QTA', gerador.descricao, retorno.time, 'danger');
+								alertson();
+
+
+								if (response.gerador_status == 0) {
+									new_message = messageCorpo('Gerador OFF', gerador.descricao, retorno.time, '#808080');
+									alertson();
+
+								}
+
 							}
 
 
@@ -142,13 +150,13 @@ $(document).ready(function () {
 
 
 
-	function messageCorpo(mensagem,descricao,time,status){
-			return `
+	function messageCorpo(mensagem, descricao, time, status) {
+		return `
 			<div class="direct-chat-msg ">
-			<div class="direct-chat-text bg-`+ status+ `" >
-				<span class="direct-chat-name float-left">`+ descricao+ `</span><br>
-				`+ mensagem+ `                                            
-				<span class="direct-chat-timestamp float-right">`+time+`</span>
+			<div class="direct-chat-text bg-`+ status + `" >
+				<span class="direct-chat-name float-left">`+ descricao + `</span><br>
+				`+ mensagem + `                                            
+				<span class="direct-chat-timestamp float-right">`+ time + `</span>
 			</div>
 			</div>
 		`;
@@ -172,87 +180,100 @@ $(document).ready(function () {
 	}
 
 
-/*
-	function getlast5(){
+	function getlast5() {
 		$.post(controller_url, { action: 'last5' }, function (res) {
-			
+
 			let retorno = JSON.parse(res);
+
+			console.log(retorno)
 
 			let item = '';
 
-			foreach (response as item) {
+			retorno.forEach( (item)=> {
 
-				$.post(controller_url, { action: 'get_gerador', id: response.id_gerador }, function (res) {
-					let retorno = JSON.parse(res);
+				$.post(controller_url, { action: 'get_gerador', id: item.gerador_id }, function (res) {
+					let response = JSON.parse(res);
 
 
-					let status= response.servidor_status
+					let status = response.servidor_status
 
 
 					if (retorno.status && retorno.gerador) {
 						let gerador = retorno.gerador
-						
+
 						let new_message = '';
 
-						let message_corpo=false;
+						let message_corpo = false;
 
-						if(response.gerador_status==1){
-							new_message =  messageCorpo('Gerador ON ',gerador.descricao,retorno.time,'success');
-
-						} 
-
-						if(!response.rede_publica && !response.gerador_status && !response.power_edificio){
-							new_message = messageCorpo('Retorno de energia da rede, gerador OFF ',gerador.descricao,retorno.time,'gray');
-							
-						}
-
-						if(response.rede_publica && response.gerador_status && !response.power_edificio){
-							new_message =  messageCorpo('Corte de energia, gerador ON e agencia com energia',gerador.descricao,retorno.time,'success'); 
-							
-						}
-
-						if(response.low_fuel){
-							new_message = messageCorpo('Gerdor com baixo nivel de combustivel',gerador.descricao,retorno.time,'danger');
+						if (response.gerador_status == 1) {
+							new_message = messageCorpo('Gerador ON ', gerador.descricao, retorno.time, 'success');
 
 						}
 
-						if(response.avariado){
-							new_message = messageCorpo('Gerdor alguma avaria não identificada',gerador.descricao,retorno.time,'danger'); 
-						}
-
-						if(response.qua_aut_trans){
-							new_message = messageCorpo('Agencia sem energia e com avaria no QTA',gerador.descricao,retorno.time,'danger');
-
+						if (!response.rede_publica && !response.gerador_status && !response.power_edificio) {
+							new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', gerador.descricao, retorno.time, 'gray');
 
 						}
-						if(response.gerador_status==0){
-							new_message = messageCorpo('Gerador OFF',gerador.descricao,retorno.time,'gray');
+
+						if (response.rede_publica && response.gerador_status && !response.power_edificio) {
+							new_message = messageCorpo('Corte de energia, gerador ON e agencia com energia', gerador.descricao, retorno.time, 'success');
 
 						}
-							
-						
+
+						if (response.low_fuel) {
+							new_message = messageCorpo('Gerdor com baixo nivel de combustivel', gerador.descricao, retorno.time, 'danger');
+
+						}
+
+						if (response.avariado) {
+							new_message = messageCorpo('Gerdor alguma avaria não identificada', gerador.descricao, retorno.time, 'danger');
+						}
+
+						if (response.qua_aut_trans) {
+							new_message = messageCorpo('Agencia sem energia e com avaria no QTA', gerador.descricao, retorno.time, 'danger');
+
+
+						}
+						if (response.gerador_status == 0) {
+							new_message = messageCorpo('Gerador OFF', gerador.descricao, retorno.time, 'gray');
+
+						}
+
+
 
 
 						corpo_message.html(new_message + old_message)
 					}
 
 				})
-			}
+			})
 		})
 	}
-*/
+
 	function getMap() {
 		$.post(controller_url, { action: 'get_geradores' }, function (retorno) {
 			var response = JSON.parse(retorno)
+			console.log(response)
 
 			// https://account.mapbox.com
 			mapboxgl.accessToken = 'pk.eyJ1IjoiaXZhbmlsZG9lZSIsImEiOiJja2hmYWwxcWkwYWptMnhwYzk2c3lmNWJxIn0.MG7-GSqPrk3JCepjLMSB9Q';
 			var map = new mapboxgl.Map({
 				container: 'map',
-				style: 'mapbox://styles/mapbox/streets-v8',
+				style: 'mapbox://styles/mapbox/streets-v11',//'mapbox://styles/mapbox/satellite-v8',streets
 				center: [-24.24721217421829, 15.905888745235975],
 				zoom: 7
 			});
+
+			var points = {
+				'type': 'FeatureCollection',
+				'features': response.data
+			}
+
+
+
+			map.on('click', 'marker', function (e) {
+				alert()
+			})
 
 			map.on('load', function () {
 				map.addSource('places', {
@@ -262,9 +283,46 @@ $(document).ready(function () {
 						'features': response.data,
 					}
 				});
+
+				points.features.forEach(function (marker) {
+					var el = document.createElement('img');
+					el.id = "marker"
+					el.className = 'marker';
+					el.style.backgroundImage = 'url(./dist/img/marker/' + marker.properties.icon + '.png)';
+					el.style.width = marker.properties.iconSize[0] + 'px';
+					el.style.height = marker.properties.iconSize[1] + 'px';
+					el.addEventListener('click', function (e) {
+
+					});
+					var popup = new mapboxgl.Popup()
+						.setLngLat(marker.geometry.coordinates)
+						.setHTML(marker.properties.description);
+					// add marker to map
+					new mapboxgl.Marker(el)
+						.setLngLat([Number(marker.geometry.coordinates[0]), Number(marker.geometry.coordinates[1])])
+						.addTo(map)
+						.setPopup(popup);
+					setInterval(function () {
+						$.post(controller_url, { action: 'get_geradorMarker', gerador_id: marker.properties.id, estado: marker.properties.icon }, function (res) {
+							let result = JSON.parse(res);
+							if (result.status) {
+								marker = result.data
+								el.style.backgroundImage = 'url(./dist/img/marker/' + marker.properties.icon + '.png)';
+								el.style.width = marker.properties.iconSize[0] + 'px';
+								el.style.height = marker.properties.iconSize[1] + 'px';
+								popup.setHTML(marker.properties.description)
+							}
+
+						})
+					}, 2000)
+
+				})
+
+
+
 				// Add a layer showing the places.
-				map.addLayer({
-					'id': 'places',
+				/*map.addLayer({
+					'id': 'geradorLayer',
 					'type': 'symbol',
 					'source': 'places',
 					'layout': {
@@ -275,10 +333,11 @@ $(document).ready(function () {
 						"icon-color": "#00ff00",
 						"icon-halo-color": "#fff",
 						"icon-halo-width": 2
+						
 					}
-				});
+				});*/
 
-				map.on('click', 'places', function (e) {
+				/*map.on('click', 'places', function (e) {
 					var coordinates = e.features[0].geometry.coordinates.slice();
 					var description = e.features[0].properties.description;
 					while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
@@ -296,7 +355,7 @@ $(document).ready(function () {
 				});
 				map.on('mouseleave', 'places', function () {
 					map.getCanvas().style.cursor = '';
-				});
+				});*/
 			});
 		})
 
@@ -335,5 +394,11 @@ $(document).ready(function () {
 		return (Math.round((now - s) * multiplier) / multiplier) + ' ' + s;
 	}
 
+	// teste som
+	function alertson() {
+		var snd = new Audio('../dist/son/alert.mp3');
+		snd.onended = function () { alert("Notificação recebida"); };
+		snd.play();
+	}
 
 });

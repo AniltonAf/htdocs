@@ -72,8 +72,6 @@ class geradorAPI extends DbConnection
                         $this->historial_alertas($user_send, $tipo, $menssagem, $status, $menssage, $codigo);
                     }
 
-
-
                     $response = send_email($this->users, $assunto, $messagem_email);
                     //dados para tabela Historico_alertas email
                     if ($response['status']) {
@@ -106,6 +104,7 @@ class geradorAPI extends DbConnection
                     $messagem_sms = 'A Agenca' . $this->grupo['nome'] . ' com QT em avaria, por favor verificar';
                     $messagem_email = 'A Agenca' . $this->grupo['nome'] . ' sem energia, avaria no Quadro de transferencia, por favor verificar';
                     $response = send_sms($this->users, $messagem_sms);
+                    //dados para tabela Historico_alertas sms   
                     if ($response['status']) {
                         $status = $response['status'];
                         $menssage = $response['message'];
@@ -114,10 +113,7 @@ class geradorAPI extends DbConnection
                         $tipo = 'sms';
                         $user_send = json_encode($response['user_send']);
                         $this->historial_alertas($user_send, $tipo, $menssagem, $status, $menssage, $codigo);
-                    }
-                    //dados para tabela Historico_alertas sms                     
-
-
+                    }                                      
 
                     $response = send_email($this->users, $assunto, $messagem_email);
                     //dados para tabela Historico_alertas email 
@@ -151,8 +147,6 @@ class geradorAPI extends DbConnection
                         $this->historial_alertas($user_send, $tipo, $menssagem, $status, $menssage, $codigo);
                     }
 
-
-
                     $response = send_email($this->users, $assunto, $messagem_email);
                     //dados para tabela Historico_alertas email 
                     if ($response['status']) {
@@ -182,7 +176,6 @@ class geradorAPI extends DbConnection
                         $user_send = json_encode($response['user_send']);
                         $this->historial_alertas($user_send, $tipo, $menssagem, $status, $menssage, $codigo);
                     }
-
 
                     $response = send_email($this->users, $assunto, $messagem_email);
                     //dados para tabela Historico_alertas email
@@ -324,9 +317,6 @@ class geradorAPI extends DbConnection
             echo $e->getMessage();
         }
     }
-
-
-
 
     function getUsers($id_grupo)
     {

@@ -117,6 +117,7 @@ $(document).ready(function(){
 				button.attr('disabled',true);
 			},
 			success: function(res){
+				console.log(res)
 				button.attr('disabled',false);
 				response= JSON.parse(res);
 

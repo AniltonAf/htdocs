@@ -166,15 +166,15 @@ switch ($action) {
 				<div class="col-sm-6">
 
 					<div class="form-group">
-						<label>Modelo</label>
+						<label>Modelo<span class="text-danger">*</span></label>
 						<input disabled type="text" class="form-control" value="<?php echo $response['modelo']; ?>" name="modelo" placeholder="Inserir Modelo" required>
 					</div>
 					<div class="form-group">
-						<label>Fabricante</label>
+						<label>Fabricante<span class="text-danger">*</span></label>
 						<input disabled type="text" class="form-control" value="<?php echo $response['fabricante']; ?>" name="fabricante" placeholder="Inserir Fabricante" required>
 					</div>
 					<div class="form-group">
-						<label>Descrição</label>
+						<label>Descrição<span class="text-danger">*</span></label>
 						<input disabled type="text" class="form-control" value="<?php echo $response['descricao']; ?>" name="descricao" placeholder="Inserir Descrição" required>
 					</div>
 					<div class="form-group">
@@ -198,14 +198,14 @@ switch ($action) {
 						<label>Potência(KW)</label>
 						<input disabled type="text" class="form-control" value="<?php echo $response['potencia']; ?>" name="potencia" placeholder="Inserir Potencia(KW)" not required>
 						<div class="form-group">
-							<label>Horas de trabalho</label>
+							<label>Horas de trabalho<span class="text-danger">*</span></label>
 							<input disabled type="text" class="form-control" value="<?php echo $response['hora_trabalho']; ?>" name="hora_trabalho" placeholder="Inserir Horas de trabalho" required>
 						</div>
 						<div class="form-group">
-							<label>Endereço IP</label>
+							<label>Endereço IP<span class="text-danger">*</span></label>
 							<input disabled type="text" class="form-control" value="<?php echo $response['ip']; ?>" name="ip" placeholder="Inserir Endereço IP" required>
 							<div class="form-group">
-								<label>Data ultima manutenção</label>
+								<label>Data ultima manutenção<span class="text-danger">*</span></label>
 								<input disabled type="date" class="form-control" value="<?php echo $response['data_manutencao']; ?>" name="data_manutencao" placeholder="Inserir Data Ultima Manutenção" required>
 							</div>
 						</div>
@@ -236,19 +236,19 @@ switch ($action) {
 				<div class="col-sm-6">
 
 					<div class="form-group">
-						<label>Modelo</label>
+						<label>Modelo<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" value="<?php echo $response['modelo']; ?>" name="modelo" placeholder="Inserir Modelo" required>
 					</div>
 					<div class="form-group">
-						<label>Fabricante</label>
+						<label>Fabricante<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" value="<?php echo $response['fabricante']; ?>" name="fabricante" placeholder="Inserir Fabricante" required>
 					</div>
 					<div class="form-group">
-						<label>Descrição</label>
+						<label>Descrição<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" value="<?php echo $response['descricao']; ?>" name="descricao" placeholder="Inserir Descrição" required>
 					</div>
 					<div class="form-group">
-						<label>Unidade Organica</label>
+						<label>Unidade Organica<span class="text-danger">*</span></label>
 						<select class="form-control" value="<?php echo $response['id_grupo']; ?>" name="id_grupo">
 							<option>Selecione</option>
 							<?php
@@ -265,7 +265,7 @@ switch ($action) {
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label>Potência(KW)</label>
+						<label>Potência(KW)<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" value="<?php echo $response['potencia']; ?>" name="potencia" placeholder="Inserir Potencia(KW)">
 					</div>
 					<div class="form-group">
