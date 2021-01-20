@@ -8,8 +8,6 @@
 	<!--===============================================================================================-->
 	<link rel="shortcut icon" href="dist/img/CaixaLogo.png">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="dist/login/vendor/bootstrap/css/bootstrap.min.css">
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="dist/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="dist/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
@@ -71,13 +69,16 @@
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							Login
+							Iniciar Sessão
 						</button>
 					</div>
 				</form>
 
 				<div class="login100-more" style="background-image: url('dist/img/login-background-image.jpg');">
-					<div style="width: 100%; height: 100%;background-color: rgba(0,0,0,0.7);">
+					<!--<div style="width: 100%; height: 100%;background-color: rgba(85, 171, 38,0.8);">
+
+					</div>-->
+					<div style="background: linear-gradient(-135deg, rgba(85, 171, 38,0.7), #000);width: 100%; height: 100%;">
 
 					</div>
 				</div>

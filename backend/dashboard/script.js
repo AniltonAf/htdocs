@@ -183,70 +183,57 @@ $(document).ready(function () {
 	function getlast5() {
 		$.post(controller_url, { action: 'last5' }, function (res) {
 
-			let retorno = JSON.parse(res);
+			let historico = JSON.parse(res);
+			
+			historico.forEach((item)=>{
 
-			console.log(retorno)
+				let new_message = '';
 
-			let item = '';
+				let corpo_message = $('.direct-chat-messages')
 
-			retorno.forEach( (item)=> {
+				let old_message = corpo_message.html();
+				
 
-				$.post(controller_url, { action: 'get_gerador', id: item.gerador_id }, function (res) {
-					let response = JSON.parse(res);
+				if (item.gerador_status == 1) {
+					new_message = messageCorpo('Gerador ON ', item.descricao, item.update_ut, 'success');
 
+				}
 
-					let status = response.servidor_status
+				if (!item.rede_publica && !item.gerador_status && !item.power_edificio) {
+					new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', item.descricao, item.update_ut, 'gray');
 
+				}
 
-					if (retorno.status && retorno.gerador) {
-						let gerador = retorno.gerador
+				if (item.rede_publica && item.gerador_status && !item.power_edificio) {
+					new_message = messageCorpo('Corte de energia, gerador ON e agencia com energia', item.descricao, item.update_ut, 'success');
 
-						let new_message = '';
+				}
 
-						let message_corpo = false;
+				if (item.low_fuel) {
+					new_message = messageCorpo('Gerdor com baixo nivel de combustivel', item.descricao, item.update_ut, 'danger');
 
-						if (response.gerador_status == 1) {
-							new_message = messageCorpo('Gerador ON ', gerador.descricao, retorno.time, 'success');
+				}
 
-						}
+				if (item.avariado) {
+					new_message = messageCorpo('Gerdor alguma avaria não identificada', item.descricao, item.update_ut, 'danger');
+				}
 
-						if (!response.rede_publica && !response.gerador_status && !response.power_edificio) {
-							new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', gerador.descricao, retorno.time, 'gray');
-
-						}
-
-						if (response.rede_publica && response.gerador_status && !response.power_edificio) {
-							new_message = messageCorpo('Corte de energia, gerador ON e agencia com energia', gerador.descricao, retorno.time, 'success');
-
-						}
-
-						if (response.low_fuel) {
-							new_message = messageCorpo('Gerdor com baixo nivel de combustivel', gerador.descricao, retorno.time, 'danger');
-
-						}
-
-						if (response.avariado) {
-							new_message = messageCorpo('Gerdor alguma avaria não identificada', gerador.descricao, retorno.time, 'danger');
-						}
-
-						if (response.qua_aut_trans) {
-							new_message = messageCorpo('Agencia sem energia e com avaria no QTA', gerador.descricao, retorno.time, 'danger');
+				if (item.qua_aut_trans) {
+					new_message = messageCorpo('Agencia sem energia e com avaria no QTA', item.descricao, item.update_ut, 'danger');
 
 
-						}
-						if (response.gerador_status == 0) {
-							new_message = messageCorpo('Gerador OFF', gerador.descricao, retorno.time, 'gray');
+				}
+				if (item.gerador_status == 0) {
+					new_message = messageCorpo('Gerador OFF', item.descricao, item.update_ut, 'gray');
 
-						}
+				}
 
 
 
 
-						corpo_message.html(new_message + old_message)
-					}
-
-				})
+				corpo_message.html(new_message + old_message)
 			})
+
 		})
 	}
 
