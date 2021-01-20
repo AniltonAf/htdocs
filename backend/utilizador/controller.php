@@ -67,7 +67,7 @@
 						<div class="form-group">
 			                <center>
 			                	<img id="foto_holder" style="max-height: 150px;border-radius: 50%" src="<?php echo 'data:image/png;base64,'.$defaul_photo; ?>">
-			                	<input type="file" name="foto" id="foto">
+			                	<input type="file" accept="image/*" name="foto" id="foto">
 			                </center>
 			            </div>
 						<div class="form-group">
@@ -187,7 +187,7 @@
 						<div class="form-group">
 			                <center>
 			                	<img id="foto_holder" style="max-height: 150px;border-radius: 50%" src="<?php echo 'data:image/png;base64,'.$response['foto']; ?>">
-			                	<input type="file" name="foto" id="foto">
+			                	<input type="file" accept="image/*" name="foto" id="foto">
 			                </center>
 			            </div>
 			            <div class="form-group">
@@ -297,12 +297,13 @@
 				//$foto_file=filter_input(INPUT_POST, 'foto_file');
 				$foto=false;
 
+				
+
 				if(isset($_FILES['foto_file']) && $_FILES['foto_file']['tmp_name']!=''){
 					$foto=base64_encode(file_get_contents($_FILES['foto_file']['tmp_name']));
 				}
 
-				$response=$data->edit($nome,$numero_funcionario,$departamento,$funcao,$email,$telefone,$id_perfil_permission,$foto,$alerta_sms,$alerta_email,$create_ut);;
-
+				$response=$data->edit($nome,$numero_funcionario,$departamento,$funcao,$email,$telefone,$id_perfil_permission,$foto,$alerta_sms,$alerta_email,$create_ut,$id);
 				echo json_encode($response);
 
 				break;	

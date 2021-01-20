@@ -1,8 +1,16 @@
 <?php require('header.php') ?>
-
+<style>
+  .marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+  }
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <section class="content"><br>
+  <section class="content"><br>
     <div class="container-fluid">
 
       <!-- ===============================================================================

@@ -180,14 +180,13 @@ Class Data extends DbConnection{
 		return $response;
 	}
 	// função para editar utilizadores
-	public function edit($nome,$numero_funcionario,$departamento,$funcao,$email,$telefone,$id_perfil_permission,$alerta_sms,$alerta_email,$foto,$id){
+	public function edit($nome,$numero_funcionario,$departamento,$funcao,$email,$telefone,$id_perfil_permission,$foto,$alerta_sms,$alerta_email,$create_ut,$id){
 		$response=array();
 		try{
 
 
 			if($foto){
 				$res = $this->db->prepare('UPDATE utilizador SET nome=:nome,numero_funcionario=:numero_funcionario,departamento=:departamento,funcao=:funcao,email=:email,telefone=:telefone,id_perfil_permission=:id_perfil_permission,alerta_sms=:alerta_sms,alerta_email=:alerta_email,foto=:foto WHERE id=:id');
-
 				$res->bindValue(':foto',$foto);
 			}else{
 				$res = $this->db->prepare('UPDATE utilizador SET nome=:nome,numero_funcionario=:numero_funcionario,departamento=:departamento,funcao=:funcao,email=:email,telefone=:telefone,id_perfil_permission=:id_perfil_permission,alerta_sms=:alerta_sms,alerta_email=:alerta_email WHERE id=:id');
@@ -218,6 +217,7 @@ Class Data extends DbConnection{
 			}
 			$response['status']=false;
 			$response['message']=$message;
+			echo $e->getMessage();
 		}
 		return $response;
 	}
