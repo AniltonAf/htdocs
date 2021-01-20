@@ -28,7 +28,7 @@ Class Data extends DbConnection{
 		$estado=1;
 		try{
 
-			$res = $this->db->prepare('SELECT id,nome,email,foto,id_perfil_permission FROM utilizador WHERE username=:username AND password=:password AND estado=1');
+			$res = $this->db->prepare('SELECT id,nome,email,foto,id_perfil_permission,funcao FROM utilizador WHERE username=:username AND password=:password AND estado=1');
 			
 			$res->bindValue(':username',$username);
 			$res->bindValue(':password',hash('sha256', $password));

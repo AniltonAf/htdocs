@@ -282,7 +282,21 @@ $(document).ready(function () {
 						"icon-color": "#00ff00",
 						"icon-halo-color": "#fff",
 						"icon-halo-width": 2
+						
 					}
+				});
+				map.addLayer({
+					"id": "circles2",
+					"source": "marker-15",
+					"type": "circle",
+					"paint": {
+						"circle-radius": 20,
+						"circle-opacity": 0,
+						"circle-stroke-width": 1,
+						"circle-stroke-color": "#00bf7c",
+						"circle-stroke-opacity": 1,
+					},
+					"filter": ["==", "modelId", 2],
 				});
 
 				map.on('click', 'places', function (e) {

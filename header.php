@@ -102,7 +102,7 @@
           <?php echo $_SESSION['caixa_monitorizacao']['user']['nome']?>
         </a>
         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-          <a href="#" class="dropdown-item">
+          <a href="profile.php" class="dropdown-item">
             <i class="fas fa-user mr-2"></i> Ver Perfil
           </a>
           <div class="dropdown-divider"></div>
@@ -182,7 +182,7 @@
           <?php if(hasRoles(['grupo'])){?> 
           <li class="nav-item">
             <a href="grupo.php" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-layer-group"></i>
               <p>
                 Grupo
               </p>
@@ -192,7 +192,7 @@
           <?php if(hasRoles(['equipamentos'])){?>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-server"></i>
               <p>
                 Equipamentos
                 <i class="right fas fa-angle-left"></i>
@@ -213,7 +213,7 @@
           <?php if(hasRoles(['reporte'])){?>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-chart-line"></i>
               <p>
                 Reporte
                 <i class="right fas fa-angle-left"></i>
@@ -241,7 +241,7 @@
           <?php if(hasRoles(['configuracao'])){?>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-wrench"></i>
+              <i class="nav-icon fas fa-cogs"></i>
               <p>
                 Configurações
                 <i class="right fas fa-angle-left"></i>
