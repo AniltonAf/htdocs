@@ -13,7 +13,6 @@ switch ($action) {
 
 	case 'list': //listar geradores
 
-
 		$response = $data->list();
 		$text = '';
 		foreach ($response as $item) {
