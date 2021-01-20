@@ -17,8 +17,8 @@ $(document).ready(function () {
 	initMqtt();
 	getMap();
 
-	//getlast5();
-	
+	getlast5();
+
 
 
 
@@ -180,75 +180,76 @@ $(document).ready(function () {
 	}
 
 
-	/*
-		function getlast5(){
-			$.post(controller_url, { action: 'last5' }, function (res) {
-				
-				let retorno = JSON.parse(res);
-	
-				let item = '';
-	
-				foreach (response as item) {
-	
-					$.post(controller_url, { action: 'get_gerador', id: response.id_gerador }, function (res) {
-						let retorno = JSON.parse(res);
-	
-	
-						let status= response.servidor_status
-	
-	
-						if (retorno.status && retorno.gerador) {
-							let gerador = retorno.gerador
-							
-							let new_message = '';
-	
-							let message_corpo=false;
-	
-							if(response.gerador_status==1){
-								new_message =  messageCorpo('Gerador ON ',gerador.descricao,retorno.time,'success');
-	
-							} 
-	
-							if(!response.rede_publica && !response.gerador_status && !response.power_edificio){
-								new_message = messageCorpo('Retorno de energia da rede, gerador OFF ',gerador.descricao,retorno.time,'gray');
-								
-							}
-	
-							if(response.rede_publica && response.gerador_status && !response.power_edificio){
-								new_message =  messageCorpo('Corte de energia, gerador ON e agencia com energia',gerador.descricao,retorno.time,'success'); 
-								
-							}
-	
-							if(response.low_fuel){
-								new_message = messageCorpo('Gerdor com baixo nivel de combustivel',gerador.descricao,retorno.time,'danger');
-	
-							}
-	
-							if(response.avariado){
-								new_message = messageCorpo('Gerdor alguma avaria não identificada',gerador.descricao,retorno.time,'danger'); 
-							}
-	
-							if(response.qua_aut_trans){
-								new_message = messageCorpo('Agencia sem energia e com avaria no QTA',gerador.descricao,retorno.time,'danger');
-	
-	
-							}
-							if(response.gerador_status==0){
-								new_message = messageCorpo('Gerador OFF',gerador.descricao,retorno.time,'gray');
-	
-							}
-								
-							
-	
-	
-							corpo_message.html(new_message + old_message)
+	function getlast5() {
+		$.post(controller_url, { action: 'last5' }, function (res) {
+
+			let retorno = JSON.parse(res);
+
+			console.log(retorno)
+
+			let item = '';
+
+			retorno.forEach( (item)=> {
+
+				$.post(controller_url, { action: 'get_gerador', id: item.gerador_id }, function (res) {
+					let response = JSON.parse(res);
+
+
+					let status = response.servidor_status
+
+
+					if (retorno.status && retorno.gerador) {
+						let gerador = retorno.gerador
+
+						let new_message = '';
+
+						let message_corpo = false;
+
+						if (response.gerador_status == 1) {
+							new_message = messageCorpo('Gerador ON ', gerador.descricao, retorno.time, 'success');
+
 						}
-	
-					})
-				}
+
+						if (!response.rede_publica && !response.gerador_status && !response.power_edificio) {
+							new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', gerador.descricao, retorno.time, 'gray');
+
+						}
+
+						if (response.rede_publica && response.gerador_status && !response.power_edificio) {
+							new_message = messageCorpo('Corte de energia, gerador ON e agencia com energia', gerador.descricao, retorno.time, 'success');
+
+						}
+
+						if (response.low_fuel) {
+							new_message = messageCorpo('Gerdor com baixo nivel de combustivel', gerador.descricao, retorno.time, 'danger');
+
+						}
+
+						if (response.avariado) {
+							new_message = messageCorpo('Gerdor alguma avaria não identificada', gerador.descricao, retorno.time, 'danger');
+						}
+
+						if (response.qua_aut_trans) {
+							new_message = messageCorpo('Agencia sem energia e com avaria no QTA', gerador.descricao, retorno.time, 'danger');
+
+
+						}
+						if (response.gerador_status == 0) {
+							new_message = messageCorpo('Gerador OFF', gerador.descricao, retorno.time, 'gray');
+
+						}
+
+
+
+
+						corpo_message.html(new_message + old_message)
+					}
+
+				})
 			})
-		}
-	*/
+		})
+	}
+
 	function getMap() {
 		$.post(controller_url, { action: 'get_geradores' }, function (retorno) {
 			var response = JSON.parse(retorno)
@@ -268,9 +269,9 @@ $(document).ready(function () {
 				'features': response.data
 			}
 
-			
 
-			map.on('click','marker', function (e) {
+
+			map.on('click', 'marker', function (e) {
 				alert()
 			})
 
@@ -285,36 +286,36 @@ $(document).ready(function () {
 
 				points.features.forEach(function (marker) {
 					var el = document.createElement('img');
-					el.id="marker"
+					el.id = "marker"
 					el.className = 'marker';
 					el.style.backgroundImage = 'url(./dist/img/marker/' + marker.properties.icon + '.png)';
 					el.style.width = marker.properties.iconSize[0] + 'px';
 					el.style.height = marker.properties.iconSize[1] + 'px';
 					el.addEventListener('click', function (e) {
-						
+
 					});
-					var popup=new mapboxgl.Popup()
-							.setLngLat(marker.geometry.coordinates)
-							.setHTML(marker.properties.description);
+					var popup = new mapboxgl.Popup()
+						.setLngLat(marker.geometry.coordinates)
+						.setHTML(marker.properties.description);
 					// add marker to map
 					new mapboxgl.Marker(el)
 						.setLngLat([Number(marker.geometry.coordinates[0]), Number(marker.geometry.coordinates[1])])
 						.addTo(map)
 						.setPopup(popup);
-					setInterval(function(){
-						$.post(controller_url, { action: 'get_geradorMarker',gerador_id: marker.properties.id,estado:marker.properties.icon}, function (res) {
-							let result=JSON.parse(res);
-							if(result.status){
-								marker=result.data
+					setInterval(function () {
+						$.post(controller_url, { action: 'get_geradorMarker', gerador_id: marker.properties.id, estado: marker.properties.icon }, function (res) {
+							let result = JSON.parse(res);
+							if (result.status) {
+								marker = result.data
 								el.style.backgroundImage = 'url(./dist/img/marker/' + marker.properties.icon + '.png)';
 								el.style.width = marker.properties.iconSize[0] + 'px';
 								el.style.height = marker.properties.iconSize[1] + 'px';
 								popup.setHTML(marker.properties.description)
 							}
-							
+
 						})
-					},2000)
-						
+					}, 2000)
+
 				})
 
 
