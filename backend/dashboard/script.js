@@ -195,7 +195,7 @@ $(document).ready(function () {
 					let response = JSON.parse(res);
 
 
-					let status = response.servidor_status
+					//let status = response.servidor_status
 
 
 					if (retorno.status && retorno.gerador) {
