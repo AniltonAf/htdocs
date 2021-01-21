@@ -189,7 +189,7 @@ $(document).ready(function () {
 
 				let new_message = '';
 
-				let corpo_message = $('.direct-chat-messages');
+				let corpo_message = $('.direct-chat-messages')
 
 				let old_message = corpo_message.html();
 				
@@ -199,53 +199,34 @@ $(document).ready(function () {
 
 				}
 
-					//let status = response.servidor_status
+				if (!item.rede_publica && !item.gerador_status && !item.power_edificio) {
+					new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', item.descricao, item.update_ut, 'gray');
+
+				}
+
+				if (item.rede_publica && item.gerador_status && !item.power_edificio) {
+					new_message = messageCorpo('Corte de energia, gerador ON e agencia com energia', item.descricao, item.update_ut, 'success');
+
+				}
+
+				if (item.low_fuel) {
+					new_message = messageCorpo('Gerdor com baixo nivel de combustivel', item.descricao, item.update_ut, 'danger');
+
+				}
+
+				if (item.avariado) {
+					new_message = messageCorpo('Gerdor alguma avaria não identificada', item.descricao, item.update_ut, 'danger');
+				}
+
+				if (item.qua_aut_trans) {
+					new_message = messageCorpo('Agencia sem energia e com avaria no QTA', item.descricao, item.update_ut, 'danger');
 
 
-					if (retorno.status && retorno.gerador) {
-						let gerador = retorno.gerador
+				}
+				if (item.gerador_status == 0) {
+					new_message = messageCorpo('Gerador OFF', item.descricao, item.update_ut, 'gray');
 
-						let new_message = '';
-
-						let message_corpo = false;
-
-						if (response.gerador_status == 1) {
-							new_message = messageCorpo('Gerador ON ', gerador.descricao, retorno.time, 'success');
-
-						}
-
-						if (!response.rede_publica && !response.gerador_status && !response.power_edificio) {
-							new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', gerador.descricao, retorno.time, 'gray');
-
-						}
-						if (!item.rede_publica && !item.gerador_status && !item.power_edificio) {
-							new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', item.descricao, item.update_ut, 'gray');
-						}
-
-						if (item.rede_publica && item.gerador_status && !item.power_edificio) {
-							new_message = messageCorpo('Corte de energia, gerador ON e agencia com energia', item.descricao, item.update_ut, 'success');
-
-						}
-
-						if (item.low_fuel) {
-							new_message = messageCorpo('Gerdor com baixo nivel de combustivel', item.descricao, item.update_ut, 'danger');
-
-						}
-
-						if (item.avariado) {
-							new_message = messageCorpo('Gerdor alguma avaria não identificada', item.descricao, item.update_ut, 'danger');
-						}
-
-						if (item.qua_aut_trans) {
-							new_message = messageCorpo('Agencia sem energia e com avaria no QTA', item.descricao, item.update_ut, 'danger');
-
-
-						}
-						if (item.gerador_status == 0) {
-							new_message = messageCorpo('Gerador OFF', item.descricao, item.update_ut, 'gray');
-
-						}
-					}
+				}
 
 
 
@@ -323,45 +304,6 @@ $(document).ready(function () {
 					}, 2000)
 
 				})
-
-
-
-				// Add a layer showing the places.
-				/*map.addLayer({
-					'id': 'geradorLayer',
-					'type': 'symbol',
-					'source': 'places',
-					'layout': {
-						'icon-image': 'marker-15',
-						'icon-allow-overlap': true
-					},
-					"paint": {
-						"icon-color": "#00ff00",
-						"icon-halo-color": "#fff",
-						"icon-halo-width": 2
-						
-					}
-				});*/
-
-				/*map.on('click', 'places', function (e) {
-					var coordinates = e.features[0].geometry.coordinates.slice();
-					var description = e.features[0].properties.description;
-					while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-						coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-					}
-
-					new mapboxgl.Popup()
-						.setLngLat(coordinates)
-						.setHTML(description)
-						.addTo(map);
-				});
-
-				map.on('mouseenter', 'places', function () {
-					map.getCanvas().style.cursor = 'pointer';
-				});
-				map.on('mouseleave', 'places', function () {
-					map.getCanvas().style.cursor = '';
-				});*/
 			});
 		})
 
