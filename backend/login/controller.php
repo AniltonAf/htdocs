@@ -21,7 +21,6 @@
 				
 				$login=$data->login($username,$password);
 
-
 				if($login){
 					$response['status']=true;
 					$response['message']="Logado com sucesso";
