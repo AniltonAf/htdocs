@@ -113,7 +113,7 @@ Class Data extends DbConnection{
 	
 		try{
 
-			$res = $this->db->prepare('SELECT * FROM gerador_historico LIMIT 5');
+			$res = $this->db->prepare('SELECT * FROM gerador_historico as gh join gerador as g on gh.gerador_id=g.id ORDER BY gh.create_ut DESC LIMIT 10');
 			
 			//$res->bindValue(':estado',$estado);
 			
