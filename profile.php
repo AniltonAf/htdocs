@@ -24,7 +24,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-4">
-
+          
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
@@ -43,16 +43,16 @@
                     <b>Nº Funcionario</b> <a class="float-right"><?php echo $_SESSION['caixa_monitorizacao']['user']['numero_funcionario']?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Departamento</b> <a class="float-right">543</a>
+                    <b>Departamento</b> <a class="float-right"><?php echo $_SESSION['caixa_monitorizacao']['user']['departamento']?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Função</b> <a class="float-right">13,287</a>
+                    <b>Função</b> <a class="float-right"><?php echo $_SESSION['caixa_monitorizacao']['user']['funcao']?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Email</b> <a class="float-right">13,287</a>
+                    <b>Email</b> <a class="float-right"><?php echo $_SESSION['caixa_monitorizacao']['user']['email']?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Telefone</b> <a class="float-right">13,287</a>
+                    <b>Telefone</b> <a class="float-right"><?php echo $_SESSION['caixa_monitorizacao']['user']['telefone']?></a>
                   </li>
                 </ul>
               </div>

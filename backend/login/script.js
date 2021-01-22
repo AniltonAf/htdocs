@@ -27,7 +27,6 @@ $(document).ready(function(){
 			},
 			success: function(res){
 
-
 				button.attr('disabled',false);
 				//console.log(res);	
 				response=JSON.parse(res);
