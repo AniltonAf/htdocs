@@ -140,8 +140,6 @@ $(document).ready(function () {
 					})
 
 
-
-
 					console.log("onMessageArrived:" + message.payloadString);
 				}
 			}
@@ -227,8 +225,6 @@ $(document).ready(function () {
 					new_message = messageCorpo('Gerador OFF', item.descricao, item.update_ut, 'gray');
 
 				}
-
-
 
 
 				corpo_message.html(new_message + old_message)
