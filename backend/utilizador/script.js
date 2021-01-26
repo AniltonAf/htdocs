@@ -133,6 +133,40 @@ $(document).ready(function(){
 		return false;
 	})
 
+			//evento submit form edit profile
+	$('#settings').on('click',function(e){
+		e.preventDefault();
+		var id=$(this).attr('data-id');
+		var form=$(this);
+		formData.append('action','editprofile')
+		var button=form.find(':button');
+		$.ajax({
+			url:controller_url,
+			type:'POST',
+			data: formData,
+			enctype:'multipart/form-data',
+			processData:false,
+			contentType: false,
+			beforeSend: function(){
+				button.attr('disabled',true);
+			},
+			success: function(res){
+				console.log(res)
+				button.attr('disabled',false);
+				response= JSON.parse(res);
+
+				if(response.status){
+					getMessage('success','Perfil Utilizador Editado');
+					getAll();
+				}else{
+					getMessage('danger','Erro edição perfil utilizador');
+				}
+			}
+
+		})
+		return false;
+	})
+
 	//evento de click eliminar
 	bodyTable.on('click','#btn-delete', function(){
 		var id=$(this).attr('data-id');

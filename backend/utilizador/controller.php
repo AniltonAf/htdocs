@@ -308,6 +308,24 @@
 
 				break;	
 
+				case 'editprofile':
+					$create_ut=date('d-m-y h:i:s');
+					$id=filter_input(INPUT_POST, 'id');
+					$password=filter_input(INPUT_POST, 'password');
+					$confirmar_password=filter_input(INPUT_POST, 'confirmar_password');
+					$nome=filter_input(INPUT_POST, 'nome');
+					$email=filter_input(INPUT_POST, 'email');
+					$telefone=filter_input(INPUT_POST, 'telefone');
+					//$foto_file=filter_input(INPUT_POST, 'foto_file');
+					$foto=false;
+					var_dump($id);
+		
+					//$response=$data->editprofile($nome,$email,$telefone,$create_ut,$id);
+					//echo json_encode($response);
+						
+					break;	
+
+
 		case 'permissao':
 				$res=json_decode(filter_input(INPUT_POST,'data'),true);
 				$id_perfil=$res['perfil'];
