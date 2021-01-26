@@ -152,9 +152,8 @@ $(document).ready(function () {
 		return `
 			<div class="direct-chat-msg ">
 			<div class="direct-chat-text bg-`+ status + `" >
-				<span class="direct-chat-name float-left">`+ descricao + `</span><br>
+				<span class="direct-chat-name float-left">`+ descricao + ` em  `+ time + `</span><br>
 				`+ mensagem + `                                            
-				<span class="direct-chat-timestamp float-right">`+ time + `</span>
 			</div>
 			</div>
 		`;
@@ -198,7 +197,7 @@ $(document).ready(function () {
 				}
 
 				if (!item.rede_publica && !item.gerador_status && !item.power_edificio) {
-					new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', item.descricao, item.update_ut, 'gray');
+					new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', item.descricao, item.update_ut, '#808080');
 
 				}
 
@@ -222,7 +221,7 @@ $(document).ready(function () {
 
 				}
 				if (item.gerador_status == 0) {
-					new_message = messageCorpo('Gerador OFF', item.descricao, item.update_ut, 'gray');
+					new_message = messageCorpo('Gerador OFF', item.descricao, item.update_ut, '#808080');
 
 				}
 

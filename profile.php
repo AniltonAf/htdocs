@@ -111,7 +111,7 @@
                   <div class="tab-pane" id="settings">
                     <form class="form-horizontal">
                       <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                        <label for="inputName" class="col-sm-2 col-form-label">Nome</label>
                         <div class="col-sm-10">
                           <input type="text" class="form-control" value="<?php echo $_SESSION['caixa_monitorizacao']['user']['nome']?>" name="nome" placeholder="Name">
                         </div>
