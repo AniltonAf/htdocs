@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require '../enviroment/db_connection.php';
 
@@ -34,7 +34,7 @@ Class Data extends DbConnection{
 
 			$line=$res->fetch(PDO::FETCH_ASSOC);
 
-			return $line['qtd'];			
+			return $line['qtd'];
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -45,13 +45,17 @@ Class Data extends DbConnection{
 		$estado=1;
 		try{
 
-			$res = $this->db->prepare('SELECT * FROM gerador as g join gerador_config as gc on gc.gerador_id=g.id WHERE estado=:estado');
-			
+
+      $id_utilizador=$_SESSION['caixa_monitorizacao']['user']['id'];
+
+			$res = $this->db->prepare('SELECT * FROM gerador as g join gerador_config as gc on gc.gerador_id=g.id WHERE estado=:estado and g.id_grupo in (select id_grupo from monogerador.grupo_acesso where id_utilizador=:id_utilizador)');
+
 			$res->bindValue(':estado',$estado);
-			
+      $res->bindValue(':id_utilizador',$id_utilizador);
+
 			$res->execute();
 
-			return $this->data($res);			
+			return $this->data($res);
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -63,13 +67,13 @@ Class Data extends DbConnection{
 		try{
 
 			$res = $this->db->prepare('SELECT * FROM gerador as g join gerador_config as gc on gc.gerador_id=g.id WHERE g.id=:id and estado=:estado');
-			
+
 			$res->bindValue(':estado',$estado);
 			$res->bindValue(':id',$id);
-			
+
 			$res->execute();
 
-			return $res->fetch(PDO::FETCH_ASSOC);			
+			return $res->fetch(PDO::FETCH_ASSOC);
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -81,12 +85,12 @@ Class Data extends DbConnection{
 		try{
 
 			$res = $this->db->prepare('SELECT * FROM mqtt_server WHERE ativo_ws=:estado');
-			
+
 			$res->bindValue(':estado',$estado);
-			
+
 			$res->execute();
 
-			return $res->fetch(PDO::FETCH_ASSOC);			
+			return $res->fetch(PDO::FETCH_ASSOC);
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -102,7 +106,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			return $this->data($res);			
+			return $this->data($res);
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -110,16 +114,16 @@ Class Data extends DbConnection{
 	}
 
 	public function last5event(){
-	
+
 		try{
 
 			$res = $this->db->prepare('SELECT * FROM gerador_historico as gh join gerador as g on gh.gerador_id=g.id ORDER BY gh.create_ut DESC LIMIT 10');
-			
+
 			//$res->bindValue(':estado',$estado);
-			
+
 			$res->execute();
 
-			return $this->data($res);			
+			return $this->data($res);
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -139,7 +143,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			$response['status']=true;		
+			$response['status']=true;
 
 		}catch(PDOException $e){
 			$response['status']=false;
@@ -162,7 +166,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			$response['status']=true;		
+			$response['status']=true;
 
 		}catch(PDOException $e){
 			$response['status']=false;
@@ -183,7 +187,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			$response['status']=true;		
+			$response['status']=true;
 
 		}catch(PDOException $e){
 			$response['status']=false;
@@ -197,12 +201,12 @@ Class Data extends DbConnection{
 		try{
 
 			$res = $this->db->prepare('SELECT * FROM grupo_acesso as g join utilizador as u on u.id=g.id_utilizador WHERE id_grupo=:id_grupo');
-			
+
 			$res->bindValue(':id_grupo',$id_grupo);
-			
+
 			$res->execute();
 
-			return $this->data($res);			
+			return $this->data($res);
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -214,12 +218,12 @@ Class Data extends DbConnection{
 		try{
 
 			$res = $this->db->prepare('SELECT * FROM utilizador WHERE id NOT IN (SELECT id_utilizador FROM grupo_acesso where id_grupo=:id_grupo) and estado=1');
-			
+
 			$res->bindValue(':id_grupo',$id_grupo);
-			
+
 			$res->execute();
 
-			return $this->data($res);			
+			return $this->data($res);
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -228,7 +232,7 @@ Class Data extends DbConnection{
 
 	// função para deletar permissao
 	public function deletePermissao($id_perfil){
-		
+
 		try{
 
 			$res = $this->db->prepare("DELETE FROM grupo WHERE id_perf_util=:id_perfil");
@@ -237,7 +241,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			return true;		
+			return true;
 
 		}catch(PDOException $e){
 			return false;
@@ -257,7 +261,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			$response['status']=true;		
+			$response['status']=true;
 
 		}catch(PDOException $e){
 			$response['status']=false;
@@ -277,7 +281,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			$response['status']=true;		
+			$response['status']=true;
 
 		}catch(PDOException $e){
 			$response['status']=false;

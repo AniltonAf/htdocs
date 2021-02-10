@@ -24,7 +24,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-4">
-          
+
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
@@ -61,12 +61,12 @@
             <!-- /.card -->
           </div>
           <!-- /.col -->
-          
+
           <div class="col-md-8">
-            <div class="card">
+            <div class="card card-primary card-outline">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Grupos</a></li>                  
+                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Grupos</a></li>
                   <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Configuração</a></li>
                   <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Atividade</a></li>
                 </ul>
@@ -74,7 +74,13 @@
               <div class="card-body">
                 <div class="tab-content">
                   <div class="active tab-pane" id="activity">
-                    
+                        <table class="table table-sm table-striped">
+                          <tbody id="corpoTabelaGrupo">
+                            <tr><td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td></tr>
+                            <tr><td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td></tr>
+                            <tr><td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td></tr>
+                          </tbody>
+                        </table>
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="timeline">
@@ -99,7 +105,7 @@
                           <div class="timeline-body">Editou perfil
                           </div>
                         </div>
-                      </div>                      
+                      </div>
                       <!-- END timeline item -->
                       <div>
                         <i class="far fa-clock bg-gray"></i>
@@ -107,39 +113,47 @@
                     </div>
                   </div>
                   <!-- /.tab-pane -->
-                  
+
                   <div class="tab-pane" id="settings">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" name="editProfile">
+                      <div class="retorno"></div>
                       <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Nome</label>
-                        <div class="col-sm-10">
+                        <label for="inputName" class="col-sm-3 col-form-label">Nome</label>
+                        <div class="col-sm-9">
                           <input type="text" class="form-control" value="<?php echo $_SESSION['caixa_monitorizacao']['user']['nome']?>" name="nome" placeholder="Name">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
+                        <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
                           <input type="email" class="form-control" value="<?php echo $_SESSION['caixa_monitorizacao']['user']['email']?>"name="email" placeholder="Email">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputName2" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                          <input type="password" class="form-control" value="<?php echo $_SESSION['caixa_monitorizacao']['user']['password']?>" name="password" placeholder="Name">
+                        <label for="inputName2" class="col-sm-3 col-form-label">Password Antiga</label>
+                        <div class="col-sm-9">
+                          <input type="password" class="form-control" value="" name="old_password" placeholder="Password Antiga">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputName2" class="col-sm-2 col-form-label">Confirmar Password</label>
-                        <div class="col-sm-10">
-                          <input type="password" class="form-control" value="<?php echo $_SESSION['caixa_monitorizacao']['user']['password']?>" name="confirmar_password" placeholder="Name">
+                        <label for="inputName2" class="col-sm-3 col-form-label">Novo Password</label>
+                        <div class="col-sm-9">
+                          <input type="password" class="form-control" value="" name="new_password" placeholder="Novo Password">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputName2" class="col-sm-2 col-form-label">Telefone</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" value="<?php echo $_SESSION['caixa_monitorizacao']['user']['telefone']?>" name="telefone" placeholder="Name">
+                        <label for="inputName2" class="col-sm-3 col-form-label">Confirmar Password</label>
+                        <div class="col-sm-9">
+                          <input type="password" class="form-control" value="" name="confirmar_password" placeholder="Cornfirma Password">
                         </div>
                       </div>
+                      <div class="form-group row">
+                        <label for="inputName2" class="col-sm-3 col-form-label">Telefone</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" value="<?php echo $_SESSION['caixa_monitorizacao']['user']['telefone']?>" name="telefone" placeholder="Telefone">
+                        </div>
+                      </div>
+                      <input type="hidden" name="id" value="<?php echo $_SESSION['caixa_monitorizacao']['user']['id']?>">
 <!--
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
@@ -149,7 +163,7 @@
                             </label>
                           </div>
                         </div>
-                      </div>  
+                      </div>
 -->
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">

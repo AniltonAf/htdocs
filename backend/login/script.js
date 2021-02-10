@@ -28,7 +28,7 @@ $(document).ready(function(){
 			success: function(res){
 
 				button.attr('disabled',false);
-				//console.log(res);	
+				//console.log(res);
 				response=JSON.parse(res);
 
 
@@ -37,13 +37,13 @@ $(document).ready(function(){
 					window.location.href='./index';
 
 				}else{
-					getMessage('danger', response.message);					
-					
+					getMessage('danger', response.message);
+
 				}
 			}
 
 		})
-		return false;
+		//return false;
 
 
 	})

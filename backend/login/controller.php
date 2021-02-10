@@ -6,7 +6,7 @@
 	$data = new Data();
 	//defenir fuso horairio para definir hora com php
 	date_default_timezone_set("Atlantic/Cape_Verde");
-	
+
 	//
 	switch ($action) {
 
@@ -18,7 +18,7 @@
 					"status"=> false,
 					"message"=> "Nome utilizador ou palavra-passe errado",
 				];
-				
+
 				$login=$data->login($username,$password);
 
 				if($login){
@@ -31,7 +31,7 @@
 				}
 
 				echo json_encode($response);
-						
+
 				break;
 
 		default:

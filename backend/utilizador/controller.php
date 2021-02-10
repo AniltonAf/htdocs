@@ -1,359 +1,377 @@
 <?php
 
-	$action= filter_input(INPUT_POST, 'action');
+$action = filter_input(INPUT_POST, 'action');
 
-	require 'sql.php';
-	$data = new Data();
-	//defenir fuso horairio para definir hora com php
-	date_default_timezone_set("Atlantic/Cape_Verde");
-	
-	//
-	switch ($action) {
+require 'sql.php';
+$data = new Data();
+//defenir fuso horairio para definir hora com php
+date_default_timezone_set("Atlantic/Cape_Verde");
 
-		case 'list':
-			 
-			 $response = $data->list();
+//
+switch ($action) {
 
-			 //var_dump($response);
+  case 'list':
 
-			 echo json_encode($response);
+    $response = $data->list();
 
-			break;
+    //var_dump($response);
 
-		case 'delete'://apagar utilizadores
+    echo json_encode($response);
 
-			$id=filter_input(INPUT_POST, 'id');
-			$estado=0;
-			$delete_ut=date('d-m-y h:i:s');
-			$response=$data->delete($id,$estado,$delete_ut);
+    break;
 
-			echo json_encode($response);
 
-			break;
-		
-		case 'desbloquear'://apagar utilizadores
 
-			$id=filter_input(INPUT_POST, 'id');
-			$estado=1;
-			$delete_ut=date('d-m-y h:i:s');
-			$response=$data->desbloquear($id,$estado,$delete_ut);
+  case 'listGrupo':
 
-			echo json_encode($response);
+    $response = $data->listGrupo();
 
-			break;
+    //var_dump($response);
 
-			case 'bloquear'://apagar utilizadores
+    echo json_encode($response);
 
-				$id=filter_input(INPUT_POST, 'id');
-				$estado=0;
-				$delete_ut=date('d-m-y h:i:s');
-				$response=$data->desbloquear($id,$estado,$delete_ut);
-	
-				echo json_encode($response);
-	
-				break;
-		
-			
-			//apresentar formulario de utilizadores
-		case 'addForm':
-			$perfil=$data->listPerfil();
-			require '../config.php';
+    break;
+
+  case 'delete': //apagar utilizadores
+
+    $id = filter_input(INPUT_POST, 'id');
+    $estado = 0;
+    $delete_ut = date('d-m-y h:i:s');
+    $response = $data->delete($id, $estado, $delete_ut);
+
+    echo json_encode($response);
+
+    break;
+
+  case 'desbloquear': //apagar utilizadores
+
+    $id = filter_input(INPUT_POST, 'id');
+    $estado = 1;
+    $delete_ut = date('d-m-y h:i:s');
+    $response = $data->desbloquear($id, $estado, $delete_ut);
+
+    echo json_encode($response);
+
+    break;
+
+  case 'bloquear': //apagar utilizadores
+
+    $id = filter_input(INPUT_POST, 'id');
+    $estado = 0;
+    $delete_ut = date('d-m-y h:i:s');
+    $response = $data->desbloquear($id, $estado, $delete_ut);
+
+    echo json_encode($response);
+
+    break;
+
+
+    //apresentar formulario de utilizadores
+  case 'addForm':
+    $perfil = $data->listPerfil();
+    require '../config.php';
 ?>
 
-			<div class="retorno"></div>
-			<form name='register'>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="form-group">
-			                <center>
-			                	<img id="foto_holder" style="max-height: 150px;border-radius: 50%" src="<?php echo 'data:image/png;base64,'.$defaul_photo; ?>">
-			                	<input type="file" accept="image/*" name="foto" id="foto">
-			                </center>
-			            </div>
-						<div class="form-group">
-			                <label>Usernamne<span class="text-danger">*</span></label>
-			                <input type="text" class="form-control" name="username" placeholder="Inserir Username" required>
-			            </div>
-			            <div class="form-group">
-			                <label>Password<span class="text-danger">*</span></label>
-			                <input type="password" class="form-control" name="password" placeholder="Inserir password" required>
-			            </div>
-			            <div class="form-group">
-			                <label>Confirmar Password<span class="text-danger">*</span></label>
-			                <input type="password" class="form-control" name="confirmar_password" placeholder="Confirmar password" required>
-			            </div>
-			            <div class="form-group">
-			                <label>Perfil Utilizador<span class="text-danger">*</span></label>
-			                <select class="form-control" name="id_perfil_permission">
-			                	<option>Selecione</option>
-			                	<?php		                		
-			                		
-			                		foreach($perfil as $line){
-			                			echo '<option value="'.$line["id"].'">'.$line["nome"].'</option>';
-			                		}
-			                	?>
-			                </select>
-						</div>
+    <div class="retorno"></div>
+    <form name='register'>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <center>
+              <img id="foto_holder" style="max-height: 150px;border-radius: 50%" src="<?php echo 'data:image/png;base64,' . $defaul_photo; ?>">
+              <input type="file" accept="image/*" name="foto" id="foto">
+            </center>
+          </div>
+          <div class="form-group">
+            <label>Usernamne<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="username" placeholder="Inserir Username" required>
+          </div>
+          <div class="form-group">
+            <label>Password<span class="text-danger">*</span></label>
+            <input type="password" class="form-control" name="password" placeholder="Inserir password" required>
+          </div>
+          <div class="form-group">
+            <label>Confirmar Password<span class="text-danger">*</span></label>
+            <input type="password" class="form-control" name="confirmar_password" placeholder="Confirmar password" required>
+          </div>
+          <div class="form-group">
+            <label>Perfil Utilizador<span class="text-danger">*</span></label>
+            <select class="form-control" name="id_perfil_permission">
+              <option>Selecione</option>
+              <?php
 
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-			                <label>Nome<span class="text-danger">*</span></label>
-			                <input type="text" class="form-control" name="nome" placeholder="Inserir nome" required>
-			            </div>
-			            <div class="form-group">
-			                <label>Numero Funcionario<span class="text-danger">*</span></label>
-			                <input type="text" class="form-control" name="numero_funcionario" placeholder="Inserir numero funcionario" required>
-			            </div>
-			            <div class="form-group">
-			                <label>Departamento<span class="text-danger">*</span></label>
-			                <input type="text" class="form-control" name="departamento" placeholder="Inserir departamento" required>
-			            </div>
-			            <div class="form-group">
-			                <label>Função<span class="text-danger">*</span></label>
-			                <input type="text" class="form-control" name="funcao" placeholder="Inserir função" required>
-			            <div class="form-group">
-							<label>E-mail<span class="text-danger">*</span></label>
-							<label><input type="checkbox" name="alerta_email"> Ativar envio de E-MAIL </label>
-			                <input type="email" class="form-control" name="email" placeholder="Inserir e-mail" required>
-			            </div>
-			            <div class="form-group">
-							<label>Telefone<span class="text-danger">*</span></label>
-							<label><input type="checkbox" name="alerta_sms"> Ativar envio de SMS </label>
-			                <input type="text" class="form-control" name="telefone" placeholder="Inserir telefone" required>
-						</div>
+              foreach ($perfil as $line) {
+                echo '<option value="' . $line["id"] . '">' . $line["nome"] . '</option>';
+              }
+              ?>
+            </select>
+          </div>
 
-					</div>
-				</div>
-	              	            
-	             <button type="submit" class="btn btn-primary">Registar</button>
-	            
-	        </form>
-		
-<?php	
-			break;
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Nome<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="nome" placeholder="Inserir nome" required>
+          </div>
+          <div class="form-group">
+            <label>Numero Funcionario<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="numero_funcionario" placeholder="Inserir numero funcionario" required>
+          </div>
+          <div class="form-group">
+            <label>Departamento<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="departamento" placeholder="Inserir departamento" required>
+          </div>
+          <div class="form-group">
+            <label>Função<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="funcao" placeholder="Inserir função" required>
+            <div class="form-group">
+              <label>E-mail<span class="text-danger">*</span></label>
+              <label><input type="checkbox" name="alerta_email"> Ativar envio de E-MAIL </label>
+              <input type="email" class="form-control" name="email" placeholder="Inserir e-mail" required>
+            </div>
+            <div class="form-group">
+              <label>Telefone<span class="text-danger">*</span></label>
+              <label><input type="checkbox" name="alerta_sms"> Ativar envio de SMS </label>
+              <input type="text" class="form-control" name="telefone" placeholder="Inserir telefone" required>
+            </div>
 
-		case 'register':
-				$estado=1;
-				$nome=filter_input(INPUT_POST, 'nome');
-				$numero_funcionario=filter_input(INPUT_POST, 'numero_funcionario');
-				$departamento=filter_input(INPUT_POST, 'departamento');
-				$funcao=filter_input(INPUT_POST, 'funcao');
-				$email=filter_input(INPUT_POST, 'email');
-				$telefone=filter_input(INPUT_POST, 'telefone');
-				$id_perfil_permission=filter_input(INPUT_POST, 'id_perfil_permission');
-				$confirmar_password=filter_input(INPUT_POST, 'confirmar_password');
-				$password=filter_input(INPUT_POST, 'password');
-				$password=hash('sha256', $password);
-				$username=filter_input(INPUT_POST, 'username');
-				$alerta_sms=filter_input(INPUT_POST, 'alerta_sms')?1:0;
-				$alerta_email=filter_input(INPUT_POST, 'alerta_email')?1:0;
-				//$foto_file=filter_input(INPUT_POST, 'foto_file');
+          </div>
+        </div>
 
+        <button type="submit" class="btn btn-primary">Registar</button>
 
-				if(isset($_FILES['foto_file']) && $_FILES['foto_file']['tmp_name']!=''){
-					$foto=base64_encode(file_get_contents($_FILES['foto_file']['tmp_name']));
-				}else{
-					require '../config.php';
-					$foto=$defaul_photo;
-				}
+    </form>
 
-				$create_ut=date('d-m-y h:i:s');
-				$response=$data->register($nome,$numero_funcionario,$departamento,$funcao,$email,$telefone,$id_perfil_permission,$password,$username,$foto,$estado,$alerta_sms,$alerta_email,$create_ut);
+  <?php
+    break;
 
-				echo json_encode($response);
-				
-				break;
-
-		case 'editForm':
-
-			$id=filter_input(INPUT_POST, 'id');
-
-			$response=$data->getItem($id);
-			$response=$response[0];
-
-			$perfil=$data->listPerfil();
-			require '../config.php';
-
-?>
-			<div class="retorno"></div>
-			<form name='edit'>
-	            
-	            <input type="hidden" value="<?php echo $response['id']; ?>" name="id">
-	            <!-- /.card-body -->
-
-	            <div class="row">
-					<div class="col-sm-6">
-						<div class="form-group">
-			                <center>
-			                	<img id="foto_holder" style="max-height: 150px;border-radius: 50%" src="<?php echo 'data:image/png;base64,'.$response['foto']; ?>">
-			                	<input type="file" accept="image/*" name="foto" id="foto">
-			                </center>
-			            </div>
-			            <div class="form-group">
-			                <label>Perfil Utilizador<span class="text-danger">*</span></label>
-			                <select class="form-control" name="id_perfil_permission">
-			                	<option>Selecione</option>
-			                	<?php		                		
-			                		
-			                		foreach($perfil as $line){
-			                			$select= ($line['id']==$response['id_perfil_permission'])?'selected':'';
-
-			                			echo '<option value="'.$line["id"].'" '.$select.'>'.$line["nome"].'</option>';
-			                		}
-			                	?>
-			                </select>
-			            </div>
-						<div class="checkbox">
-							
-							
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-			                <label>Nome<span class="text-danger">*</span></label>
-			                <input type="text" class="form-control" value="<?php echo $response['nome']; ?>" name="nome" placeholder="Inserir nome" required>
-			            </div>
-			            <div class="form-group">
-			                <label>Numero Funcionario<span class="text-danger">*</span></label>
-			                <input type="text" class="form-control" value="<?php echo $response['numero_funcionario']; ?>" name="numero_funcionario" placeholder="Inserir numero funcionario" required>
-			            </div>
-			            <div class="form-group">
-			                <label>Departamento<span class="text-danger">*</span></label>
-			                <input type="text" class="form-control" value="<?php echo $response['departamento']; ?>" name="departamento" placeholder="Inserir departamento" required>
-			            </div>
-			            <div class="form-group">
-			                <label>Função<span class="text-danger">*</span></label>
-			                <input type="text" class="form-control" value="<?php echo $response['funcao']; ?>" name="funcao" placeholder="Inserir função" required>
-			            <div class="form-group">
-							<label>E-mail<span class="text-danger">*</span></label>
-							<label>
-								<input type="checkbox" <?php echo $response['alerta_email']? 'checked':''; ?> name="alerta_email"> E-MAIL
-							</label>
-			                <input type="text" class="form-control" value="<?php echo $response['email']; ?>" name="email" placeholder="Inserir e-mail" required>
-			            </div>
-			            <div class="form-group">
-							<label>Telefone<span class="text-danger">*</span></label>
-							<label>
-								<input type="checkbox" <?php echo $response['alerta_sms']? 'checked':''; ?> name="alerta_sms"> SMS
-							</label>
-			                <input type="text" class="form-control" value="<?php echo $response['telefone']; ?>" name="telefone" placeholder="Inserir telefone" required>
-						</div>
-
-					</div>
-				</div>
-	            <button type="submit" class="btn btn-primary">Editar</button>
-	            
-	        </form>
-		
-<?php	
-			break;
+  case 'register':
+    $estado = 1;
+    $nome = filter_input(INPUT_POST, 'nome');
+    $numero_funcionario = filter_input(INPUT_POST, 'numero_funcionario');
+    $departamento = filter_input(INPUT_POST, 'departamento');
+    $funcao = filter_input(INPUT_POST, 'funcao');
+    $email = filter_input(INPUT_POST, 'email');
+    $telefone = filter_input(INPUT_POST, 'telefone');
+    $id_perfil_permission = filter_input(INPUT_POST, 'id_perfil_permission');
+    $confirmar_password = filter_input(INPUT_POST, 'confirmar_password');
+    $password = filter_input(INPUT_POST, 'password');
+    $password = hash('sha256', $password);
+    $username = filter_input(INPUT_POST, 'username');
+    $alerta_sms = filter_input(INPUT_POST, 'alerta_sms') ? 1 : 0;
+    $alerta_email = filter_input(INPUT_POST, 'alerta_email') ? 1 : 0;
+    //$foto_file=filter_input(INPUT_POST, 'foto_file');
 
 
-		case 'permitionForm':
+    if (isset($_FILES['foto_file']) && $_FILES['foto_file']['tmp_name'] != '') {
+      $foto = base64_encode(file_get_contents($_FILES['foto_file']['tmp_name']));
+    } else {
+      require '../config.php';
+      $foto = $defaul_photo;
+    }
 
-			$id_perfil=filter_input(INPUT_POST, 'id');
+    $create_ut = date('d-m-y h:i:s');
+    $response = $data->register($nome, $numero_funcionario, $departamento, $funcao, $email, $telefone, $id_perfil_permission, $password, $username, $foto, $estado, $alerta_sms, $alerta_email, $create_ut);
 
-			$response=$data->listPermition($id_perfil);
+    echo json_encode($response);
 
-			echo '<form name="permition" id-perfil="'.$id_perfil.'">';
-			echo '<div class="retorno"></div>';
-				foreach ($response as $line) {
+    break;
 
-					$isCheck=$line['permissao']? 'checked':'';
+  case 'editForm':
 
-					echo '
+    $id = filter_input(INPUT_POST, 'id');
+
+    $response = $data->getItem($id);
+    $response = $response[0];
+
+    $perfil = $data->listPerfil();
+    require '../config.php';
+
+  ?>
+    <div class="retorno"></div>
+    <form name='edit'>
+
+      <input type="hidden" value="<?php echo $response['id']; ?>" name="id">
+      <!-- /.card-body -->
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <center>
+              <img id="foto_holder" style="max-height: 150px;border-radius: 50%" src="<?php echo 'data:image/png;base64,' . $response['foto']; ?>">
+              <input type="file" accept="image/*" name="foto" id="foto">
+            </center>
+          </div>
+          <div class="form-group">
+            <label>Perfil Utilizador<span class="text-danger">*</span></label>
+            <select class="form-control" name="id_perfil_permission">
+              <option>Selecione</option>
+              <?php
+
+              foreach ($perfil as $line) {
+                $select = ($line['id'] == $response['id_perfil_permission']) ? 'selected' : '';
+
+                echo '<option value="' . $line["id"] . '" ' . $select . '>' . $line["nome"] . '</option>';
+              }
+              ?>
+            </select>
+          </div>
+          <div class="checkbox">
+
+
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Nome<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" value="<?php echo $response['nome']; ?>" name="nome" placeholder="Inserir nome" required>
+          </div>
+          <div class="form-group">
+            <label>Numero Funcionario<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" value="<?php echo $response['numero_funcionario']; ?>" name="numero_funcionario" placeholder="Inserir numero funcionario" required>
+          </div>
+          <div class="form-group">
+            <label>Departamento<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" value="<?php echo $response['departamento']; ?>" name="departamento" placeholder="Inserir departamento" required>
+          </div>
+          <div class="form-group">
+            <label>Função<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" value="<?php echo $response['funcao']; ?>" name="funcao" placeholder="Inserir função" required>
+            <div class="form-group">
+              <label>E-mail<span class="text-danger">*</span></label>
+              <label>
+                <input type="checkbox" <?php echo $response['alerta_email'] ? 'checked' : ''; ?> name="alerta_email"> E-MAIL
+              </label>
+              <input type="text" class="form-control" value="<?php echo $response['email']; ?>" name="email" placeholder="Inserir e-mail" required>
+            </div>
+            <div class="form-group">
+              <label>Telefone<span class="text-danger">*</span></label>
+              <label>
+                <input type="checkbox" <?php echo $response['alerta_sms'] ? 'checked' : ''; ?> name="alerta_sms"> SMS
+              </label>
+              <input type="text" class="form-control" value="<?php echo $response['telefone']; ?>" name="telefone" placeholder="Inserir telefone" required>
+            </div>
+
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Editar</button>
+
+    </form>
+
+  <?php
+    break;
+
+
+  case 'permitionForm':
+
+    $id_perfil = filter_input(INPUT_POST, 'id');
+
+    $response = $data->listPermition($id_perfil);
+
+    echo '<form name="permition" id-perfil="' . $id_perfil . '">';
+    echo '<div class="retorno"></div>';
+    foreach ($response as $line) {
+
+      $isCheck = $line['permissao'] ? 'checked' : '';
+
+      echo '
 						<div class="form-check">
-						  <input name="'.$line['id'].'" class="form-check-input" '. $isCheck .'  type="checkbox">
+						  <input name="' . $line['id'] . '" class="form-check-input" ' . $isCheck . '  type="checkbox">
 						  <label class="form-check-label" for="defaultCheck1">
-						    '.$line['descrisao'].'
+						    ' . $line['descrisao'] . '
 						  </label>
 						</div>
 					';
-				}
-			echo '<br><button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-upload"></i> Atualizar</button></div>';
+    }
+    echo '<br><button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-upload"></i> Atualizar</button></div>';
 
-			echo '</form>';
+    echo '</form>';
 
-?>
-			
-			
-		
-<?php	
-			break;
-
-		case 'edit':
-				$create_ut=date('d-m-y h:i:s');
-				$id=filter_input(INPUT_POST, 'id');
-				$nome=filter_input(INPUT_POST, 'nome');
-				$numero_funcionario=filter_input(INPUT_POST, 'numero_funcionario');
-				$departamento=filter_input(INPUT_POST, 'departamento');
-				$funcao=filter_input(INPUT_POST, 'funcao');
-				$email=filter_input(INPUT_POST, 'email');
-				$telefone=filter_input(INPUT_POST, 'telefone');
-				$id_perfil_permission=filter_input(INPUT_POST, 'id_perfil_permission');
-				$alerta_sms=filter_input(INPUT_POST, 'alerta_sms')?1:0;
-				$alerta_email=filter_input(INPUT_POST, 'alerta_email')?1:0;
-				//$foto_file=filter_input(INPUT_POST, 'foto_file');
-				$foto=false;
-
-				
-
-				if(isset($_FILES['foto_file']) && $_FILES['foto_file']['tmp_name']!=''){
-					$foto=base64_encode(file_get_contents($_FILES['foto_file']['tmp_name']));
-				}
-
-				$response=$data->edit($nome,$numero_funcionario,$departamento,$funcao,$email,$telefone,$id_perfil_permission,$foto,$alerta_sms,$alerta_email,$create_ut,$id);
-				echo json_encode($response);
-
-				break;	
-
-				case 'editprofile':
-					$create_ut=date('d-m-y h:i:s');
-					$id=filter_input(INPUT_POST, 'id');
-					$password=filter_input(INPUT_POST, 'password');
-					$confirmar_password=filter_input(INPUT_POST, 'confirmar_password');
-					$nome=filter_input(INPUT_POST, 'nome');
-					$email=filter_input(INPUT_POST, 'email');
-					$telefone=filter_input(INPUT_POST, 'telefone');
-					//$foto_file=filter_input(INPUT_POST, 'foto_file');
-					$foto=false;
-					var_dump($id);
-		
-					//$response=$data->editprofile($nome,$email,$telefone,$create_ut,$id);
-					//echo json_encode($response);
-						
-					break;	
+  ?>
 
 
-		case 'permissao':
-				$res=json_decode(filter_input(INPUT_POST,'data'),true);
-				$id_perfil=$res['perfil'];
-				$permissoes=$res['permissao'];
 
-				$response=$data->deletePermissao($id_perfil);
+<?php
+    break;
 
-				$result=[
-					'status'=>false
-				];
+  case 'edit':
+    $create_ut = date('d-m-y h:i:s');
+    $id = filter_input(INPUT_POST, 'id');
+    $nome = filter_input(INPUT_POST, 'nome');
+    $numero_funcionario = filter_input(INPUT_POST, 'numero_funcionario');
+    $departamento = filter_input(INPUT_POST, 'departamento');
+    $funcao = filter_input(INPUT_POST, 'funcao');
+    $email = filter_input(INPUT_POST, 'email');
+    $telefone = filter_input(INPUT_POST, 'telefone');
+    $id_perfil_permission = filter_input(INPUT_POST, 'id_perfil_permission');
+    $alerta_sms = filter_input(INPUT_POST, 'alerta_sms') ? 1 : 0;
+    $alerta_email = filter_input(INPUT_POST, 'alerta_email') ? 1 : 0;
+    //$foto_file=filter_input(INPUT_POST, 'foto_file');
+    $foto = false;
 
-				if($response){
 
-					$result['status']=$response;
 
-					foreach ($permissoes as $permissao) {
-						$id_per=$permissao['name'];
-						$response=$data->addPermissao($id_perfil,$id_per);
-						$result['status']=$response;
-					}
-				}
-				
-				echo json_encode($result);
-				break;	
+    if (isset($_FILES['foto_file']) && $_FILES['foto_file']['tmp_name'] != '') {
+      $foto = base64_encode(file_get_contents($_FILES['foto_file']['tmp_name']));
+    }
 
-		default:
-			# code...
-			break;
-	}
+    $response = $data->edit($nome, $numero_funcionario, $departamento, $funcao, $email, $telefone, $id_perfil_permission, $foto, $alerta_sms, $alerta_email, $create_ut, $id);
+    echo json_encode($response);
+
+    break;
+
+  case 'editprofile':
+    $create_ut = date('d-m-y h:i:s');
+    $id = filter_input(INPUT_POST, 'id');
+    $old_password = filter_input(INPUT_POST, 'old_password');
+    $new_password = filter_input(INPUT_POST, 'new_password');
+    $confirmar_password = filter_input(INPUT_POST, 'confirmar_password');
+    $nome = filter_input(INPUT_POST, 'nome');
+    $email = filter_input(INPUT_POST, 'email');
+    $telefone = filter_input(INPUT_POST, 'telefone');
+    //$foto_file=filter_input(INPUT_POST, 'foto_file');
+    //$foto = false;
+
+    $response = $data->editprofile($nome, $email, $telefone, $id, $old_password, $new_password, $confirmar_password);
+
+    if ($response["status"] == true) {
+      session_start();
+      session_destroy();
+      ob_end_flush();
+    }
+    echo json_encode($response);
+
+    break;
+
+
+  case 'permissao':
+    $res = json_decode(filter_input(INPUT_POST, 'data'), true);
+    $id_perfil = $res['perfil'];
+    $permissoes = $res['permissao'];
+
+    $response = $data->deletePermissao($id_perfil);
+
+    $result = [
+      'status' => false
+    ];
+
+    if ($response) {
+
+      $result['status'] = $response;
+
+      foreach ($permissoes as $permissao) {
+        $id_per = $permissao['name'];
+        $response = $data->addPermissao($id_perfil, $id_per);
+        $result['status'] = $response;
+      }
+    }
+
+    echo json_encode($result);
+    break;
+
+  default:
+    # code...
+    break;
+}
 
 ?>

@@ -153,7 +153,7 @@ $(document).ready(function () {
 			<div class="direct-chat-msg ">
 			<div class="direct-chat-text bg-`+ status + `" >
 				<span class="direct-chat-name float-left">`+ descricao + ` em  `+ time + `</span><br>
-				`+ mensagem + `                                            
+				`+ mensagem + `
 			</div>
 			</div>
 		`;
@@ -181,7 +181,7 @@ $(document).ready(function () {
 		$.post(controller_url, { action: 'last5' }, function (res) {
 
 			let historico = JSON.parse(res);
-			
+
 			historico.forEach((item)=>{
 
 				let new_message = '';
@@ -189,7 +189,7 @@ $(document).ready(function () {
 				let corpo_message = $('.direct-chat-messages')
 
 				let old_message = corpo_message.html();
-				
+
 
 				if (item.gerador_status == 1) {
 					new_message = messageCorpo('Gerador ON ', item.descricao, item.update_ut, 'success');
@@ -234,8 +234,9 @@ $(document).ready(function () {
 
 	function getMap() {
 		$.post(controller_url, { action: 'get_geradores' }, function (retorno) {
+      console.log(retorno)
 			var response = JSON.parse(retorno)
-			console.log(response)
+
 
 			// https://account.mapbox.com
 			mapboxgl.accessToken = 'pk.eyJ1IjoiaXZhbmlsZG9lZSIsImEiOiJja2hmYWwxcWkwYWptMnhwYzk2c3lmNWJxIn0.MG7-GSqPrk3JCepjLMSB9Q';

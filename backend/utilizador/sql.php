@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use Twilio\Http\Response;
+use Twilio\Rest\Verify;
 
 require '../enviroment/db_connection.php';
 
@@ -30,12 +33,34 @@ Class Data extends DbConnection{
 
 		//	$res = $this->db->prepare('SELECT * FROM utilizador WHERE estado=:estado');
 			$res = $this->db->prepare('SELECT * FROM utilizador');
-			
+
 		//	$res->bindValue(':estado',$estado);
-			
+
 			$res->execute();
 
-			return $this->data($res);			
+			return $this->data($res);
+
+		}catch(PDOException $e){
+				echo $e->getMessage();
+		}
+	}
+
+  public function listGrupo(){
+		//$estado=1;
+		try{
+
+      session_start();
+      $id=$_SESSION['caixa_monitorizacao']['user']['id'];
+      ob_end_flush();
+
+		//	$res = $this->db->prepare('SELECT * FROM utilizador WHERE estado=:estado');
+			$res = $this->db->prepare('select * from monogerador.grupo_acesso as ga join monogerador.grupo g on g.id =ga.id_grupo where id_utilizador =:id');
+
+		  $res->bindValue(':id',$id);
+
+			$res->execute();
+
+			return $this->data($res);
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -48,12 +73,12 @@ Class Data extends DbConnection{
 		try{
 
 			$res = $this->db->prepare('SELECT * FROM perfilutilizador WHERE estado=:estado');
-			
+
 			$res->bindValue(':estado',$estado);
-			
+
 			$res->execute();
 
-			return $this->data($res);			
+			return $this->data($res);
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -69,7 +94,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			return $this->data($res);			
+			return $this->data($res);
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -89,7 +114,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			$response['status']=true;		
+			$response['status']=true;
 
 		}catch(PDOException $e){
 			$response['status']=false;
@@ -102,17 +127,17 @@ Class Data extends DbConnection{
 		public function desbloquear($id,$estado,$delete_ut){
 			$response=array();
 			try{
-	
+
 				$res = $this->db->prepare('UPDATE utilizador SET estado=:estado, delete_ut=:delete_ut WHERE id=:id');
-	
+
 				$res->bindValue(':id',$id);
 				$res->bindValue(':estado',$estado);
 				$res->bindValue(':delete_ut',$delete_ut);
-	
+
 				$res->execute();
-	
-				$response['status']=true;		
-	
+
+				$response['status']=true;
+
 			}catch(PDOException $e){
 				$response['status']=false;
 			}
@@ -124,17 +149,17 @@ Class Data extends DbConnection{
 		public function bloquear($id,$estado,$delete_ut){
 			$response=array();
 			try{
-	
+
 				$res = $this->db->prepare('UPDATE utilizador SET estado=:estado, delete_ut=:delete_ut WHERE id=:id');
-	
+
 				$res->bindValue(':id',$id);
 				$res->bindValue(':estado',$estado);
 				$res->bindValue(':delete_ut',$delete_ut);
-	
+
 				$res->execute();
-	
-				$response['status']=true;		
-	
+
+				$response['status']=true;
+
 			}catch(PDOException $e){
 				$response['status']=false;
 			}
@@ -165,7 +190,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			$response['status']=true;		
+			$response['status']=true;
 
 		}catch(PDOException $e){
 			//echo $e->getMessage();
@@ -192,7 +217,7 @@ Class Data extends DbConnection{
 				$res = $this->db->prepare('UPDATE utilizador SET nome=:nome,numero_funcionario=:numero_funcionario,departamento=:departamento,funcao=:funcao,email=:email,telefone=:telefone,id_perfil_permission=:id_perfil_permission,alerta_sms=:alerta_sms,alerta_email=:alerta_email WHERE id=:id');
 			}
 
-			
+
 
 			$res->bindValue(':nome',$nome);
 			$res->bindValue(':numero_funcionario',$numero_funcionario);
@@ -207,7 +232,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			$response['status']=true;		
+			$response['status']=true;
 
 		}catch(PDOException $e){
 			$message='Erro ao editar utilizador';
@@ -227,12 +252,12 @@ Class Data extends DbConnection{
 		try{
 
 			$res = $this->db->prepare('SELECT p.id,p.nome,p.descrisao, IF((SELECT pp.id FROM perfil_permissao as pp where pp.id_per=p.id and pp.id_perf_util=:id_perfil),true,false) as permissao FROM `permissoes` as p order by p.nome asc');
-			
+
 			$res->bindValue(':id_perfil',$id_perfil);
-			
+
 			$res->execute();
 
-			return $this->data($res);			
+			return $this->data($res);
 
 		}catch(PDOException $e){
 				echo $e->getMessage();
@@ -241,7 +266,7 @@ Class Data extends DbConnection{
 
 	// função para deletar permissao
 	public function deletePermissao($id_perfil){
-		
+
 		try{
 
 			$res = $this->db->prepare("DELETE FROM perfil_permissao WHERE id_perf_util=:id_perfil");
@@ -250,7 +275,7 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			return true;		
+			return true;
 
 		}catch(PDOException $e){
 			return false;
@@ -259,7 +284,7 @@ Class Data extends DbConnection{
 
 	// função para atribuir permissao
 	public function addPermissao($id_perfil,$id_per){
-		
+
 		try{
 
 			$res = $this->db->prepare("INSERT INTO perfil_permissao (id_perf_util,id_per) VALUES (:id_perfil,:id_per)");
@@ -269,14 +294,76 @@ Class Data extends DbConnection{
 
 			$res->execute();
 
-			return true;		
+			return true;
 
 		}catch(PDOException $e){
 			return false;
 		}
 	}
 
+
+  function verifyPassword($id,$password){
+    try {
+
+			$res = $this->db->prepare('SELECT id FROM utilizador WHERE id=:id AND password=:password');
+
+			$res->bindValue(':id', $id);
+			$res->bindValue(':password', hash('sha256', $password));
+
+			$res->execute();
+
+			return $res->rowCount()?true:false;
+		} catch (PDOException $e) {
+			echo $e->getMessage();
+      return false;
+		}
+  }
+  //Editar Perfil
+  function editprofile($nome,$email,$telefone,$id,$old_password,$new_password, $confirmar_password){
+    try{
+
+      $response=[
+        "message"=>null,
+        "status"=>false,
+      ];
+
+      if(($old_password && (!$new_password || !$confirmar_password))  || ($new_password && (!$old_password || !$confirmar_password))  || ($confirmar_password && (!$old_password || !$new_password))){
+        $response['message']="Todos os campos de password devem ser preenchidas";
+        return $response;
+      }
+      if($old_password && $new_password && $confirmar_password){
+        if(!$this->verifyPassword($id,$old_password)){
+          $response['message']="Passsword antigo errado";
+          return $response;
+        }
+        if(strcmp($new_password,$confirmar_password)!==0){
+          $response['message']="Novo password e confirmar são diferentes";
+          return $response;
+        }
+
+        $res = $this->db->prepare("UPDATE utilizador set password=:password, nome=:nome, telefone=:telefone, email=:email WHERE id=:id");
+        $res->bindValue(':password',hash('sha256', $new_password));
+      }else{
+        $res = $this->db->prepare("UPDATE utilizador set nome=:nome, telefone=:telefone, email=:email WHERE id=:id");
+      }
+
+
+
+      $res->bindValue(':email',$email);
+      $res->bindValue(':telefone',$telefone);
+      $res->bindValue(':nome',$nome);
+      $res->bindValue(':id',$id);
+
+			$res->execute();
+
+      $response["status"]=true;
+      $response["message"]="Registado com sucesso, Sessão próximo a esgotar";
+			return $response;
+
+		}catch(PDOException $e){
+      echo $e->getMessage();
+			return false;
+		}
+  }
+
 }
-
-
-?>
