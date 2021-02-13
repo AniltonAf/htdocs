@@ -42,11 +42,14 @@ Class Data extends DbConnection{
 	}
 
 	public function getGerador($gerador_id ){
+		
 		try{
+			$id_utilizador=$_SESSION['caixa_monitorizacao']['user']['id'];
 
-			$res = $this->db->prepare('SELECT * FROM gerador WHERE id=:gerador_id');
+			$res = $this->db->prepare('SELECT * FROM gerador as g WHERE id=:gerador_id and g.id_grupo in (select id_grupo from monogerador.grupo_acesso where id_utilizador=:id_utilizador)');
 
 			$res->bindValue(':gerador_id',$gerador_id );
+			$res->bindValue(':id_utilizador',$id_utilizador);
 
 			$res->execute();
 

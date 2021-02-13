@@ -5,6 +5,8 @@
 	require 'sql.php';
 	$data = new Data();
 
+	session_start();
+
 	switch ($action) {
 
 		case 'list':	
@@ -70,7 +72,7 @@
 				$text .= '<td>' . $power_edificio . '</td>';
 				$text .= '<td>' . $qua_aut_trans . '</td>';
 				$text .= '<td>' . $low_fuel . '</td>';
-				$text .= '<td>' . $item['create_ut'] . '</td>';
+				$text .= '<td>' . $item['create_h_ut'] . '</td>';
 				$text .= '</tr>';
 			}
 			echo $text;

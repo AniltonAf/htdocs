@@ -56,7 +56,7 @@ Class Data extends DbConnection{
 			$res = $this->db->prepare('SELECT * FROM gerador as g join gerador_config as gc on gc.gerador_id=g.id WHERE estado=:estado and g.id_grupo in (select id_grupo from monogerador.grupo_acesso where id_utilizador=:id_utilizador)');
 
 			$res->bindValue(':estado',$estado);
-      $res->bindValue(':id_utilizador',$id_utilizador);
+      		$res->bindValue(':id_utilizador',$id_utilizador);
 
 			$res->execute();
 
@@ -71,10 +71,13 @@ Class Data extends DbConnection{
 		$estado=1;
 		try{
 
-			$res = $this->db->prepare('SELECT * FROM gerador as g join gerador_config as gc on gc.gerador_id=g.id WHERE g.id=:id and estado=:estado');
+			$id_utilizador=$_SESSION['caixa_monitorizacao']['user']['id'];
+
+			$res = $this->db->prepare('SELECT * FROM gerador as g join gerador_config as gc on gc.gerador_id=g.id WHERE g.id=:id and estado=:estado and g.id_grupo in (select id_grupo from monogerador.grupo_acesso where id_utilizador=:id_utilizador)');
 
 			$res->bindValue(':estado',$estado);
 			$res->bindValue(':id',$id);
+			$res->bindValue(':id_utilizador',$id_utilizador);
 
 			$res->execute();
 
@@ -105,7 +108,7 @@ Class Data extends DbConnection{
 	public function getItem($id){
 		try{
 
-			$res = $this->db->prepare('SELECT * FROM grupo WHERE id=:id');
+			$res = $this->db->prepare('SELECT * FROM grupo WHERE id=:id and g.id_grupo in (select id_grupo from grupo_acesso where id_utilizador=:id_utilizador)');
 
 			$res->bindValue(':id',$id);
 
@@ -122,7 +125,11 @@ Class Data extends DbConnection{
 
 		try{
 
-			$res = $this->db->prepare('SELECT * FROM gerador_historico as gh join gerador as g on gh.gerador_id=g.id ORDER BY gh.create_ut DESC LIMIT 10');
+			$id_utilizador=$_SESSION['caixa_monitorizacao']['user']['id'];
+
+			$res = $this->db->prepare('SELECT * FROM gerador_historico as gh join gerador as g on gh.gerador_id=g.id  and g.id_grupo in (select id_grupo from grupo_acesso where id_utilizador=:id_utilizador) ORDER BY gh.create_h_ut ASC LIMIT 10');
+
+			$res->bindValue(':id_utilizador',$id_utilizador);
 
 			$res->execute();
 			

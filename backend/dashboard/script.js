@@ -177,8 +177,6 @@ $(document).ready(function () {
 
 			let historico = JSON.parse(res);
 
-			console.log(historico);
-
 			historico.forEach((item)=>{
 
 				let new_message = '';
@@ -189,36 +187,36 @@ $(document).ready(function () {
 
 
 				if (item.gerador_status == 1) {
-					new_message = messageCorpo('Gerador ON ', item.descricao, item.create_ut, 'success');
+					new_message = messageCorpo('Gerador ON ', item.descricao, item.create_h_ut, 'success');
 
 				}
 
 				if (!item.rede_publica && !item.gerador_status && !item.power_edificio) {
-					new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', item.descricao, item.create_ut, '#808080');
+					new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', item.descricao, item.create_h_ut, '#808080');
 
 				}
 
 				if (item.rede_publica && item.gerador_status && !item.power_edificio) {
-					new_message = messageCorpo('Corte de energia, gerador ON e agencia com energia', item.descricao, item.create_ut, 'success');
+					new_message = messageCorpo('Corte de energia, gerador ON e agencia com energia', item.descricao, item.create_h_ut, 'success');
 
 				}
 
 				if (item.low_fuel) {
-					new_message = messageCorpo('Gerdor com baixo nivel de combustivel', item.descricao, item.create_ut, 'danger');
+					new_message = messageCorpo('Gerdor com baixo nivel de combustivel', item.descricao, item.create_h_ut, 'danger');
 
 				}
 
 				if (item.avariado) {
-					new_message = messageCorpo('Gerdor alguma avaria não identificada', item.descricao, item.create_ut, 'danger');
+					new_message = messageCorpo('Gerdor alguma avaria não identificada', item.descricao, item.create_h_ut, 'danger');
 				}
 
 				if (item.qua_aut_trans) {
-					new_message = messageCorpo('Agencia sem energia e com avaria no QTA', item.descricao, item.create_ut, 'danger');
+					new_message = messageCorpo('Agencia sem energia e com avaria no QTA', item.descricao, item.create_h_ut, 'danger');
 
 
 				}
 				if (item.gerador_status == 0) {
-					new_message = messageCorpo('Gerador OFF', item.descricao, item.create_ut, '#808080');
+					new_message = messageCorpo('Gerador OFF', item.descricao, item.create_h_ut, '#808080');
 
 				}
 
