@@ -152,8 +152,8 @@
                     </button>
                   </div>
                 </div>
-                <div class="card-body" style="display: block;min-height: 500px;">
-                  <div class="direct-chat-messages" style="height: 450px;">
+                <div class="card-body" style="display: block;min-height: 500px; padding:8px">
+                  <div class="direct-chat-messages" style="height: 450px; padding:0px">
                   </div>
                 </div>
               </div>
