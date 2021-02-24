@@ -127,7 +127,7 @@ Class Data extends DbConnection{
 
 			$id_utilizador=$_SESSION['caixa_monitorizacao']['user']['id'];
 
-			$res = $this->db->prepare('SELECT * FROM gerador_historico as gh join gerador as g on gh.gerador_id=g.id  and g.id_grupo in (select id_grupo from grupo_acesso where id_utilizador=:id_utilizador) ORDER BY gh.create_h_ut ASC LIMIT 10');
+			$res = $this->db->prepare('SELECT * FROM gerador_historico as gh join gerador as g on gh.gerador_id=g.id  and g.id_grupo in (select id_grupo from grupo_acesso where id_utilizador=:id_utilizador) ORDER BY gh.create_h_ut DESC LIMIT 10');
 
 			$res->bindValue(':id_utilizador',$id_utilizador);
 
