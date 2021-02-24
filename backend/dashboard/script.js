@@ -20,9 +20,6 @@ $(document).ready(function () {
 	getlast5();
 
 
-
-
-
 	$('#modalAdd').on('click', '#btnAdd', function () {
 		var id_grupo = $(this).attr('data-id')
 		var modal = $('#modalUser');
@@ -80,9 +77,7 @@ $(document).ready(function () {
 					$.post(controller_url, { action: 'get_gerador', id: response.id_gerador }, function (res) {
 						let retorno = JSON.parse(res);
 
-
 						let status = response.servidor_status
-
 
 						if (retorno.status && retorno.gerador) {
 							let gerador = retorno.gerador
@@ -192,36 +187,36 @@ $(document).ready(function () {
 
 
 				if (item.gerador_status == 1) {
-					new_message = messageCorpo('Gerador ON ', item.descricao, item.update_ut, 'success');
+					new_message = messageCorpo('Gerador ON ', item.descricao, item.create_h_ut, 'success');
 
 				}
 
 				if (!item.rede_publica && !item.gerador_status && !item.power_edificio) {
-					new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', item.descricao, item.update_ut, '#808080');
+					new_message = messageCorpo('Retorno de energia da rede, gerador OFF ', item.descricao, item.create_h_ut, '#808080');
 
 				}
 
 				if (item.rede_publica && item.gerador_status && !item.power_edificio) {
-					new_message = messageCorpo('Corte de energia, gerador ON e agencia com energia', item.descricao, item.update_ut, 'success');
+					new_message = messageCorpo('Corte de energia, gerador ON e agencia com energia', item.descricao, item.create_h_ut, 'success');
 
 				}
 
 				if (item.low_fuel) {
-					new_message = messageCorpo('Gerdor com baixo nivel de combustivel', item.descricao, item.update_ut, 'danger');
+					new_message = messageCorpo('Gerdor com baixo nivel de combustivel', item.descricao, item.create_h_ut, 'danger');
 
 				}
 
 				if (item.avariado) {
-					new_message = messageCorpo('Gerdor alguma avaria não identificada', item.descricao, item.update_ut, 'danger');
+					new_message = messageCorpo('Gerdor alguma avaria não identificada', item.descricao, item.create_h_ut, 'danger');
 				}
 
 				if (item.qua_aut_trans) {
-					new_message = messageCorpo('Agencia sem energia e com avaria no QTA', item.descricao, item.update_ut, 'danger');
+					new_message = messageCorpo('Agencia sem energia e com avaria no QTA', item.descricao, item.create_h_ut, 'danger');
 
 
 				}
 				if (item.gerador_status == 0) {
-					new_message = messageCorpo('Gerador OFF', item.descricao, item.update_ut, '#808080');
+					new_message = messageCorpo('Gerador OFF', item.descricao, item.create_h_ut, '#808080');
 
 				}
 
@@ -234,11 +229,8 @@ $(document).ready(function () {
 
 	function getMap() {
 		$.post(controller_url, { action: 'get_geradores' }, function (retorno) {
-      console.log(retorno)
 			var response = JSON.parse(retorno)
 
-
-			// https://account.mapbox.com
 			mapboxgl.accessToken = 'pk.eyJ1IjoiaXZhbmlsZG9lZSIsImEiOiJja2hmYWwxcWkwYWptMnhwYzk2c3lmNWJxIn0.MG7-GSqPrk3JCepjLMSB9Q';
 			var map = new mapboxgl.Map({
 				container: 'map',
