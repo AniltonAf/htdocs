@@ -78,7 +78,7 @@ switch ($action) {
         <div class="col-sm-6">
           <div class="form-group">
             <center>
-              <img id="foto_holder" style="max-height: 150px;border-radius: 50%" src="<?php echo 'data:image/png;base64,' . $defaul_photo; ?>">
+              <img id="foto_holder" style="max-height: 122px;border-radius: 60%" src="<?php echo 'data:image/png;base64,' . $defaul_photo; ?>">
               <input type="file" accept="image/*" name="foto" id="foto">
             </center>
           </div>
@@ -109,6 +109,7 @@ switch ($action) {
 
         </div>
         <div class="col-sm-6">
+        <label>  <span</label> 
           <div class="form-group">
             <label>Nome<span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="nome" placeholder="Inserir nome" required>
@@ -124,17 +125,17 @@ switch ($action) {
           <div class="form-group">
             <label>Função<span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="funcao" placeholder="Inserir função" required>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
               <label>E-mail<span class="text-danger">*</span></label>
               <label><input type="checkbox" name="alerta_email"> Ativar envio de E-MAIL </label>
               <input type="email" class="form-control" name="email" placeholder="Inserir e-mail" required>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
               <label>Telefone<span class="text-danger">*</span></label>
               <label><input type="checkbox" name="alerta_sms"> Ativar envio de SMS </label>
               <input type="text" class="form-control" name="telefone" placeholder="Inserir telefone" required>
-            </div>
-
+           
           </div>
         </div>
 
@@ -198,7 +199,7 @@ switch ($action) {
         <div class="col-sm-6">
           <div class="form-group">
             <center>
-              <img id="foto_holder" style="max-height: 150px;border-radius: 50%" src="<?php echo 'data:image/png;base64,' . $response['foto']; ?>">
+              <img id="foto_holder" style="max-height: 210px;border-radius: 50%" src="<?php echo 'data:image/png;base64,' . $response['foto']; ?>">
               <input type="file" accept="image/*" name="foto" id="foto">
             </center>
           </div>
@@ -217,8 +218,8 @@ switch ($action) {
             </select>
           </div>
           <div class="checkbox">
-
-
+            <label>Função<span class="text-danger">*</span></label>
+              <input type="text" class="form-control" value="<?php echo $response['funcao']; ?>" name="funcao" placeholder="Inserir função" required>
           </div>
         </div>
         <div class="col-sm-6">
@@ -235,8 +236,6 @@ switch ($action) {
             <input type="text" class="form-control" value="<?php echo $response['departamento']; ?>" name="departamento" placeholder="Inserir departamento" required>
           </div>
           <div class="form-group">
-            <label>Função<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" value="<?php echo $response['funcao']; ?>" name="funcao" placeholder="Inserir função" required>
             <div class="form-group">
               <label>E-mail<span class="text-danger">*</span></label>
               <label>

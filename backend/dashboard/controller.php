@@ -35,7 +35,8 @@ switch ($action) {
         ['Estado', 'Quantidade'],
         ['Ligado', intval($data->count_estado("gerador_status", true))],
         ['Desligado', intval($data->count_estado("gerador_status", false))],
-        ['Avariado', intval($data->count_estado("avariado", true))]
+        ['Avariado', intval($data->count_estado("avariado", true))],
+        ['Baixo nivel combustivel', intval($data->count_estado("low_fuel", true))]
       ];
     }
     elseif($chart_id==2){
@@ -52,6 +53,7 @@ switch ($action) {
         ['Avariado', intval($data->count_estado("qua_aut_trans", false))]
       ];
     }
+    
     echo json_encode($res);
     break;
 

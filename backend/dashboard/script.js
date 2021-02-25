@@ -11,6 +11,8 @@ $(document).ready(function () {
   //listar items
   setInterval(function () {
     getAll();
+    chart_estado();
+    
 
 
   }, 2000);
@@ -18,9 +20,7 @@ $(document).ready(function () {
   getMap();
 
   getlast5();
-
-  chart_estado();
-  chart_top_10()
+  chart_top_10();
 
 
   $('#modalAdd').on('click', '#btnAdd', function () {
@@ -248,8 +248,6 @@ $(document).ready(function () {
         'type': 'FeatureCollection',
         'features': response.data
       }
-
-
 
       map.on('click', 'marker', function (e) {
         alert()
