@@ -189,6 +189,8 @@ switch ($action) {
 	case 'last5';
 		$response = $data->last5event();
 
+		rsort($response);
+
 		echo json_encode($response);
 
 		break;
