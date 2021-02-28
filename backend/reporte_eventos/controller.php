@@ -9,13 +9,42 @@
 
 	switch ($action) {
 
-		case 'list':	
+		case 'list':
 			// Carregar o historico de Eventos ocorridos  nos geradores
 			$response = $data->list();
-			$text = '';
+
+			echo printAll($response);
+
+			break;
+
+      case 'filtrar':
+
+        $gerador_id = filter_input(INPUT_POST, 'gerador_id');
+        $gerador_status = filter_input(INPUT_POST, 'gerador_status');
+        $avariado = filter_input(INPUT_POST, 'avariado');
+        $time = filter_input(INPUT_POST, 'data');
+
+        $datas = explode(' - ',$time);
+
+        $data_in =$datas[0];
+
+        $data_out=$datas[1];
+
+
+        $response = $data->filtrar($gerador_id, $gerador_status, $avariado, $data_in, $data_out);
+
+        echo printAll($response);
+
+		default:
+			# code...
+			break;
+	}
+
+
+
+  function printAll($response){
+    $text = '';
 			foreach ($response as $item) {
-				$responseGerador = $data->getGerador($item['gerador_id']);
-				$responseGerador = $responseGerador[0];
 				if ($item["gerador_status"] == 0) {
 					$gerador_status = '<div>OFF</div>';
 				} elseif ($item["gerador_status"] == 1) {
@@ -31,7 +60,7 @@
 				} else {
 					$avariado = '<div>Sem Dados</div>';
 				}
-				
+
 				if ($item["rede_publica"] == 0) {
 					$rede_publica = '<div>OPERACIONAL</div>';
 				} elseif ($item["rede_publica"] == 1) {
@@ -65,7 +94,7 @@
 				}
 
 				$text .= '<tr>';
-				$text .= '<td>' . $responseGerador['descricao'] . '</td>';
+				$text .= '<td>' . $item["descricao"] . '</td>';
 				$text .= '<td>' . $gerador_status . '</td>';
 				$text .= '<td>' . $avariado . '</td>';
 				$text .= '<td>' . $rede_publica . '</td>';
@@ -75,13 +104,6 @@
 				$text .= '<td>' . $item['create_h_ut'] . '</td>';
 				$text .= '</tr>';
 			}
-			echo $text;
-	
-			break;
 
-		default:
-			# code...
-			break;
-	}
-
-?>
+      return $text;
+  }

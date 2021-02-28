@@ -127,7 +127,7 @@
 
 
           <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-5">
               <div class="card card-outline card-primary">
                 <div class="card-header">
                   <h5 class="card-title">Localização Geradores</h5>
@@ -152,12 +152,59 @@
                     </button>
                   </div>
                 </div>
-                <div class="card-body" style="display: block;min-height: 500px;">
-                  <div class="direct-chat-messages" style="height: 450px;">
+                <div class="card-body" style="display: block;min-height: 500px; padding:8px">
+                  <div class="direct-chat-messages" style="height: 450px; padding:0px">
                   </div>
                 </div>
               </div>
             </div>
+
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card card-outline card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">
+                        <select id="chart_estado_select" style="border: none;">
+                          <option value="1">Estado Geradores</option>
+                          <option value="2">Estado Rede Publica</option>
+                          <option value="3">Estado QAT</option>
+                        </select>
+                      </h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body" id="chart_estado" style="display: block;min-height: 216px; padding:8px">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="card card-outline card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Top 10
+                        <select name="" id="chart_top_10_select" style="border: none;">
+                          <option value="1">Gerador Avariado</option>
+                          <option value="2">Avaria no QAT</option>
+                          <option value="3">Avaria na Rede publica</option>
+                        </select>
+                      </h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body" id="chart_top_10" style="display: block;min-height: 216px; padding:8px">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
 
 
           </div>
@@ -185,4 +232,5 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="backend/dashboard/script.js"></script>
