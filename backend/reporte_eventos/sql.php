@@ -42,7 +42,7 @@ Class Data extends DbConnection{
 	}
 
 
-  function filtrar($gerador_id, $gerador_status, $avariado, $data_in, $data_out){
+  function filtrar($gerador_id, $gerador_status, $avariado, $rede_publica, $power_edificio, $qua_aut_trans, $low_fuel,  $data_in, $data_out){
     try{
 
       $filtro='';
