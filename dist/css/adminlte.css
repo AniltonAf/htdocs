@@ -19612,7 +19612,7 @@ html.maximized-card {
   background: #d2d6de;
   border: 1px solid #d2d6de;
   color: #444;
-  margin: 5px 0 0 50px;
+  margin: 5px 0 0 0px;
   padding: 5px 10px;
   position: relative;
 }
@@ -31220,3 +31220,24 @@ a.text-muted:hover {
   color: #ffffff;
 }
 /*# sourceMappingURL=adminlte.css.map */
+
+
+
+
+
+/** MY CSS*/
+
+
+.direct-chat-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+.direct-chat-messages::-webkit-scrollbar-track {
+  background:#ddd;
+  border-radius: 10px;
+}
+
+.direct-chat-messages::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #007bff;
+}
