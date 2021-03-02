@@ -11,12 +11,6 @@ session_start();
 
 switch ($action) {
 
-  case 'getAll':
-    $response = $data->list();
-
-    echo json_encode($response);
-    break;
-
 	case 'list': //listar geradores
 
 		$response = $data->list();
@@ -151,7 +145,7 @@ switch ($action) {
 		$response = $data->register($modelo, $fabricante, $descricao, $potencia, $hora_trabalho, $data_manutencao, $id_grupo, $latitude,$longitude,  $estado, $create_ut);
 
 		echo json_encode($response);
-
+		
 		break;
 
 
