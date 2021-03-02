@@ -1,4 +1,4 @@
-$ git commit -m "Resolved merge conflict by incorporating both suggestions."<?php
+<?php
 
 require '../enviroment/db_connection.php';
 
