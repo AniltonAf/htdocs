@@ -176,19 +176,19 @@ switch ($action) {
 				<div class="col-sm-6">
 
 					<div class="form-group">
-						<label>Modelo<span class="text-danger">*</span></label>
+						<label>Modelo</label>
 						<input disabled type="text" class="form-control" value="<?php echo $response['modelo']; ?>" name="modelo" placeholder="Inserir Modelo" required>
 					</div>
 					<div class="form-group">
-						<label>Fabricante<span class="text-danger">*</span></label>
+						<label>Fabricante</label>
 						<input disabled type="text" class="form-control" value="<?php echo $response['fabricante']; ?>" name="fabricante" placeholder="Inserir Fabricante" required>
 					</div>
 					<div class="form-group">
-						<label>Descrição<span class="text-danger">*</span></label>
+						<label>Descrição</label>
 						<input disabled type="text" class="form-control" value="<?php echo $response['descricao']; ?>" name="descricao" placeholder="Inserir Descrição" required>
 					</div>
 					<div class="form-group">
-						<label>Modelo Motor <span class="text-danger">*</span></label>
+						<label>Modelo Motor </label>
 						<input disabled type="text" class="form-control" value="<?php echo $response['modelo_motor']; ?>" name="modelo_motor" placeholder="Inserir Modelo Motor" required>
 					</div>
 					<div class="form-group">
@@ -211,14 +211,14 @@ switch ($action) {
 						<label>Potência(KW)</label>
 						<input disabled type="text" class="form-control" value="<?php echo $response['potencia']; ?>" name="potencia" placeholder="Inserir Potencia(KW)" not required>
 						<div class="form-group">
-							<label>Horas de trabalho<span class="text-danger">*</span></label>
+							<label>Horas de trabalho</label>
 							<input disabled type="text" class="form-control" value="<?php echo $response['hora_trabalho']; ?>" name="hora_trabalho" placeholder="Inserir Horas de trabalho" required>
 						</div>
 						<div class="form-group">
-							<label>Endereço IP<span class="text-danger">*</span></label>
+							<label>Endereço IP</label>
 							<input disabled type="text" class="form-control" value="<?php echo $response['ip']; ?>" name="ip" placeholder="Inserir Endereço IP" not required>
 							<div class="form-group">
-								<label>Data ultima manutenção<span class="text-danger">*</span></label>
+								<label>Data ultima manutenção</label>
 								<input disabled type="date" class="form-control" value="<?php echo $response['data_manutencao']; ?>" name="data_manutencao" placeholder="Inserir Data Ultima Manutenção" required>
 							</div>
 						</div>
@@ -300,7 +300,9 @@ switch ($action) {
 
 					<input type="hidden" name="id" value="<?php echo $response['id']; ?>">
 
-					<button type="submit" class="btn btn-primary">Registar</button>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Registar</button>
 
 		</form>
 
@@ -435,11 +437,11 @@ switch ($action) {
 		$hora_trabalho = filter_input(INPUT_POST, 'hora_trabalho');
 		$ip = filter_input(INPUT_POST, 'ip');
 		$data_manutencao = filter_input(INPUT_POST, 'data_manutencao');
-		$ = filter_input(INPUT_POST, '');
+		$modelo_motor = filter_input(INPUT_POST, 'modelo_motor');
 		$id_grupo = filter_input(INPUT_POST, 'id_grupo');
 		$id = filter_input(INPUT_POST, 'id');
 
-		$response = $data->edit($modelo, $fabricante, $descricao, $potencia, $hora_trabalho, $ip, $data_manutencao, $id_grupo, $id);
+		$response = $data->edit($modelo, $fabricante, $descricao, $potencia, $hora_trabalho, $ip, $data_manutencao,$modelo_motor, $id_grupo, $id);
 
 		echo json_encode($response);
 
