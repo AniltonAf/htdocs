@@ -90,11 +90,14 @@ switch ($action) {
 						<input type="text" class="form-control" name="descricao" placeholder="Inserir Descrição" required>
 					</div>
 					<div class="form-group">
+						<label>Modelo Motor <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" name="modelo_motor" placeholder="Inserir Modelo Motor" required>
+					</div>
+					<div class="form-group">
 						<label>Unidade Organica <span class="text-danger">*</span></label>
 						<select class="form-control" name="id_grupo">
 							<option>Selecione</option>
 							<?php
-
 							foreach ($grupo as $line) {
 								echo '<option value="' . $line["id"] . '">' . $line["nome"] . '</option>';
 							}
@@ -146,9 +149,10 @@ switch ($action) {
 		$id_grupo = filter_input(INPUT_POST, 'id_grupo');
 		$latitude = filter_input(INPUT_POST, 'latitude');
 		$longitude = filter_input(INPUT_POST, 'longitude');
+		$modelo_motor = filter_input(INPUT_POST, 'modelo_motor');
 		$create_ut = date('d-m-y h:i:s');
 		$estado = 1;
-		$response = $data->register($modelo, $fabricante, $descricao, $potencia, $hora_trabalho, $data_manutencao, $id_grupo, $latitude,$longitude,  $estado, $create_ut);
+		$response = $data->register($modelo, $fabricante, $descricao, $potencia, $hora_trabalho, $data_manutencao, $id_grupo, $latitude,$longitude,  $estado, $modelo_motor, $create_ut);
 
 		echo json_encode($response);
 
@@ -184,11 +188,14 @@ switch ($action) {
 						<input disabled type="text" class="form-control" value="<?php echo $response['descricao']; ?>" name="descricao" placeholder="Inserir Descrição" required>
 					</div>
 					<div class="form-group">
+						<label>Modelo Motor <span class="text-danger">*</span></label>
+						<input disabled type="text" class="form-control" value="<?php echo $response['modelo_motor']; ?>" name="modelo_motor" placeholder="Inserir Modelo Motor" required>
+					</div>
+					<div class="form-group">
 						<label>Unidade Organica</label>
 						<select disabled class="form-control" value="<?php echo $response['id_grupo']; ?>" name="id_grupo">
 							<option>Selecione</option>
 							<?php
-
 							foreach ($grupo as $line) {
 								$select = ($line['id'] == $response['id_grupo']) ? 'selected' : '';
 
@@ -209,7 +216,7 @@ switch ($action) {
 						</div>
 						<div class="form-group">
 							<label>Endereço IP<span class="text-danger">*</span></label>
-							<input disabled type="text" class="form-control" value="<?php echo $response['ip']; ?>" name="ip" placeholder="Inserir Endereço IP" required>
+							<input disabled type="text" class="form-control" value="<?php echo $response['ip']; ?>" name="ip" placeholder="Inserir Endereço IP" not required>
 							<div class="form-group">
 								<label>Data ultima manutenção<span class="text-danger">*</span></label>
 								<input disabled type="date" class="form-control" value="<?php echo $response['data_manutencao']; ?>" name="data_manutencao" placeholder="Inserir Data Ultima Manutenção" required>
@@ -254,6 +261,10 @@ switch ($action) {
 						<input type="text" class="form-control" value="<?php echo $response['descricao']; ?>" name="descricao" placeholder="Inserir Descrição" required>
 					</div>
 					<div class="form-group">
+						<label>Modelo Motor <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" value="<?php echo $response['modelo_motor']; ?>" name="modelo_motor" placeholder="Inserir Modelo Motor" required>
+					</div>
+					<div class="form-group">
 						<label>Unidade Organica<span class="text-danger">*</span></label>
 						<select class="form-control" value="<?php echo $response['id_grupo']; ?>" name="id_grupo">
 							<option>Selecione</option>
@@ -280,7 +291,7 @@ switch ($action) {
 					</div>
 					<div class="form-group">
 						<label>Endereço IP</label>
-						<input type="text" class="form-control" value="<?php echo $response['ip']; ?>" name="ip" placeholder="Inserir Endereço IP" required>
+						<input disabled type="text" class="form-control" value="<?php echo $response['ip']; ?>" name="ip" placeholder="Inserir Endereço IP" required>
 						<div class="form-group">
 							<label>Data ultima manutenção</label>
 							<input type="date" class="form-control" value="<?php echo $response['data_manutencao']; ?>" name="data_manutencao" placeholder="Inserir Data Ultima Manutenção" required>
@@ -424,6 +435,7 @@ switch ($action) {
 		$hora_trabalho = filter_input(INPUT_POST, 'hora_trabalho');
 		$ip = filter_input(INPUT_POST, 'ip');
 		$data_manutencao = filter_input(INPUT_POST, 'data_manutencao');
+		$ = filter_input(INPUT_POST, '');
 		$id_grupo = filter_input(INPUT_POST, 'id_grupo');
 		$id = filter_input(INPUT_POST, 'id');
 

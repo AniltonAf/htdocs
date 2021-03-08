@@ -75,7 +75,7 @@ if(!hasRoles(['utilizadores','utilizadores_utilizador','utilizadores_utilizador_
                   </select>
                 </div>
                 <div class="form-group mb-2 mr-3">
-                  <label class="mr-2">Rede Publica</label>
+                  <label class="mr-2">Rede Pública</label>
                   <select name="rede_publica" id="" class="form-control form-control-sm">
                     <option value="">Todos</option>
                     <option value="1">CORTE ENERGIA</option>
@@ -99,7 +99,7 @@ if(!hasRoles(['utilizadores','utilizadores_utilizador','utilizadores_utilizador_
                   </select>
                 </div>
                 <div class="form-group mb-2 mr-3">
-                  <label class="mr-2">Nivel Combustivel</label>
+                  <label class="mr-2">Nível Combustível</label>
                   <select name="low_fuel" id="" class="form-control form-control-sm">
                     <option value="">Todos</option>
                     <option value="1">BAIXO</option>
@@ -108,7 +108,7 @@ if(!hasRoles(['utilizadores','utilizadores_utilizador','utilizadores_utilizador_
                 </div>
 
                 <div class="form-group mb-2 mr-3">
-                  <label class="mr-2">Ocorreu entre</label>
+                  <label class="mr-2">Data</label>
                   <input type="text" name="data" value="" class="form-control form-control-sm" style="width: 300px;">
                 </div>
 
@@ -130,11 +130,11 @@ if(!hasRoles(['utilizadores','utilizadores_utilizador','utilizadores_utilizador_
                     <th>Gerador</th>
                     <th>Estado</th>
                     <th>Avaria Gerador</th>
-                    <th>Rede Publica</th>
+                    <th>Rede Pública</th>
                     <th>Agência Energia</th>
                     <th>QTA</th>
-                    <th>Nivel Combustivel</th>
-                    <th>Ocorreu em:</th>
+                    <th>Nível Combustível</th>
+                    <th>Data:</th>
                   </tr>
                 </thead>
                 <tbody>
