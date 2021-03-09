@@ -90,7 +90,7 @@ Class Data extends DbConnection{
 		}
 	}
 
-	// função para deletar utilizadores
+	// função para deletar geradores
 	public function delete($id,$estado,$delete_ut){
 		$response=array();
 		try{

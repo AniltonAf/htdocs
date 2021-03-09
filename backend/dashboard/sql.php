@@ -29,7 +29,6 @@ Class Data extends DbConnection{
 
 			$id_utilizador=$_SESSION['caixa_monitorizacao']['user']['id'];
 
-		//	$res = $this->db->prepare('SELECT Count(*) as qtd FROM gerador_config WHERE '.$campo.'=:status');
 			$res = $this->db->prepare('SELECT Count(*) as qtd FROM gerador_config as gc join gerador as g on g.id=gc.gerador_id WHERE '.$campo.'=:status and g.id_grupo in (select id_grupo from grupo_acesso where id_utilizador=:id_utilizador)');
 
 			$res->bindValue(':status',$status);
@@ -151,6 +150,27 @@ Class Data extends DbConnection{
 			$res = $this->db->prepare('SELECT * FROM gerador_historico as gh join gerador as g on gh.gerador_id=g.id  where g.id_grupo in (select id_grupo from grupo_acesso where id_utilizador=:id_utilizador) ORDER BY gh.create_h_ut DESC LIMIT 10');
 
 			$res->bindValue(':id_utilizador',$id_utilizador);
+
+			$res->execute();
+
+			return $this->data($res);
+
+
+		}catch(PDOException $e){
+				echo $e->getMessage();
+		}
+	}
+
+	public function horas_trabalho($gerador_id){
+
+		try{
+
+			$id_utilizador=$_SESSION['caixa_monitorizacao']['user']['id'];
+
+			$res = $this->db->prepare('select gerador_id , gerador_status,create_h_ut FROM monogerador.gerador_historico where gerador_id=:gerador_id and g.id_grupo in (select id_grupo from grupo_acesso where id_utilizador=:id_utilizador) ORDER BY gh.create_h_ut ');
+
+			$res->bindValue(':id_utilizador',$id_utilizador);
+			$res->bindValue(':gerador_id',$gerador_id);
 
 			$res->execute();
 
