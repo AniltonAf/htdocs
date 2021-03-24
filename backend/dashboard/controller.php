@@ -166,8 +166,11 @@ switch ($action) {
     $estado_marker = filter_input(INPUT_POST, 'estado');
     $line = $data->getGerador($gerador_id);
 
+    // horas trabalho gerador
+  //  $horas_trabalhos= $data->horas_trabalho($gerador_id);
 
-
+  //var_dump($horas_trabalhos);
+  
 
     $estado_icon = '';
     if ($line["avariado"] == null) {

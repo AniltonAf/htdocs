@@ -30,7 +30,7 @@
                 </div>
                 <div class="icon"><i class="fas fa-power-off"></i></div>
                 <a href="#" class="small-box-footer">
-                  Ver Lista <i class="fas fa-arrow-circle-right"></i>
+                <!--  Ver Lista <i class="fas fa-arrow-circle-right"></i>-->
                 </a>
               </div>
             </div>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="icon"><i class="fas fa-power-off"></i></div>
                 <a href="#" class="small-box-footer">
-                  Ver Lista <i class="fas fa-arrow-circle-right"></i>
+                 <!--  Ver Lista <i class="fas fa-arrow-circle-right"></i>-->
                 </a>
               </div>
             </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="icon"><i class="fas fa-wrench"></i></div>
                 <a href="#" class="small-box-footer">
-                  Ver Lista <i class="fas fa-arrow-circle-right"></i>
+                  <!--  Ver Lista <i class="fas fa-arrow-circle-right"></i>-->
                 </a>
               </div>
             </div>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="icon" style="color:Lightblue"><i class="fas fa-plug"></i></div>
                 <a href="#" class="small-box-footer bg-info">
-                  Ver Lista <i class="fas fa-arrow-circle-right"></i>
+                  <!--  Ver Lista <i class="fas fa-arrow-circle-right"></i>-->
                 </a>
               </div>
             </div>
@@ -99,7 +99,7 @@
                 </div>
                 <div class="icon" style="color:Lightblue"><i class="fas fa-bolt"></i></div>
                 <a href="#" class="small-box-footer bg-info">
-                  Ver Lista <i class="fas fa-arrow-circle-right"></i>
+                  <!--  Ver Lista <i class="fas fa-arrow-circle-right"></i>-->
                 </a>
               </div>
             </div>
@@ -119,7 +119,7 @@
                 </div>
                 <div class="icon" style="color:Lightblue"><i class="fas fa-gas-pump"></i></div>
                 <a href="#" class="small-box-footer bg-info">
-                  Ver Lista <i class="fas fa-arrow-circle-right"></i>
+                  <!--  Ver Lista <i class="fas fa-arrow-circle-right"></i>-->
                 </a>
               </div>
             </div>

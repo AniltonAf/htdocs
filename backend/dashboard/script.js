@@ -250,7 +250,7 @@ $(document).ready(function () {
       }
 
       map.on('click', 'marker', function (e) {
-        alert()
+     
       })
 
       map.on('load', function () {
