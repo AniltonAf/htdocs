@@ -6,7 +6,6 @@ require 'sql.php';
 $data = new Data();
 //defenir fuso horairio para definir hora com php
 date_default_timezone_set("Atlantic/Cape_Verde");
-
 //
 switch ($action) {
 
@@ -109,7 +108,7 @@ switch ($action) {
 
         </div>
         <div class="col-sm-6">
-        <label>  <span</label> 
+        <label>  <span</label>
           <div class="form-group">
             <label>Nome<span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="nome" placeholder="Inserir nome" required>
@@ -135,7 +134,7 @@ switch ($action) {
               <label>Telefone<span class="text-danger">*</span></label>
               <label><input type="checkbox" name="alerta_sms"> Ativar envio de SMS </label>
               <input type="text" class="form-control" name="telefone" placeholder="Inserir telefone" required>
-           
+
           </div>
         </div>
 

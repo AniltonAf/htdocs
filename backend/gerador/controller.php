@@ -129,7 +129,7 @@ switch ($action) {
 					</div>
 				</div>
 				<div class="col-sm-6">
-				  <div id="map" style="width: 100%; min-height:300px"></div>
+				  <div id="map" style="width: 100%; height:100%"></div>
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Registar</button>
@@ -435,7 +435,7 @@ switch ($action) {
 		$hora_trabalho = filter_input(INPUT_POST, 'hora_trabalho');
 		$ip = filter_input(INPUT_POST, 'ip');
 		$data_manutencao = filter_input(INPUT_POST, 'data_manutencao');
-		$ = filter_input(INPUT_POST, '');
+		//$ = filter_input(INPUT_POST, '');
 		$id_grupo = filter_input(INPUT_POST, 'id_grupo');
 		$id = filter_input(INPUT_POST, 'id');
 

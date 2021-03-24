@@ -10,7 +10,7 @@
     //require 'backend/enviroment/db_connection.php';
     require 'backend/enviroment/function.php';
    }
-  
+
   if(!isset($_SESSION['caixa_monitorizacao']))  header('Location: login.php');
 
 
@@ -53,7 +53,7 @@
 </head>
 <!--<body class="hold-transition sidebar-mini layout-fixed"> -->
 <body class="sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse" style="height: auto;min-height: 100%;">
-<div class="wrapper">  
+<div class="wrapper">
 
 
   <!-- Navbar -->
@@ -67,7 +67,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      
+
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -98,7 +98,7 @@
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <img src="data:image/png;base64,<?php echo $_SESSION['caixa_monitorizacao']['user']['foto']?>" style="max-height: 25px; border-radius: 50%"> 
+          <img src="data:image/png;base64,<?php echo $_SESSION['caixa_monitorizacao']['user']['foto']?>" style="max-height: 25px; border-radius: 50%">
           <?php echo $_SESSION['caixa_monitorizacao']['user']['nome']?>
         </a>
         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
@@ -125,8 +125,8 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-      
-     
+
+
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -150,7 +150,7 @@
               </li>
               </ul>
           </li>
-          <?php if(hasRoles(['utilizadores'])){?>     
+          <?php if(hasRoles(['utilizadores'])){?>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -179,7 +179,7 @@
             </ul>
           </li>
          <?php }?>
-          <?php if(hasRoles(['grupo'])){?> 
+          <?php if(hasRoles(['grupo'])){?>
           <li class="nav-item">
             <a href="grupo.php" class="nav-link">
               <i class="nav-icon fas fa-layer-group"></i>
@@ -188,7 +188,7 @@
               </p>
             </a>
           </li>
-          <?php }?> 
+          <?php }?>
           <?php if(hasRoles(['equipamentos'])){?>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -206,10 +206,10 @@
                   <p>Gerador</p>
                 </a>
               </li>
-              <?php }?> 
+              <?php }?>
             </ul>
           </li>
-          <?php }?> 
+          <?php }?>
           <?php if(hasRoles(['reporte'])){?>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -230,7 +230,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="reportalertas.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Alertas</p>
                 </a>
