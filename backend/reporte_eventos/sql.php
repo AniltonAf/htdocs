@@ -42,7 +42,7 @@ Class Data extends DbConnection{
 	}
 
 
-  function filtrar($gerador_id, $gerador_status, $avariado, $data_in, $data_out){
+  function filtrar($gerador_id, $gerador_status, $avariado, $rede_publica, $power_edificio, $data_in, $data_out){
     try{
 
       $filtro='';
@@ -53,6 +53,9 @@ Class Data extends DbConnection{
 
       if($avariado || $avariado!='') $filtro= $filtro==''?" where avariado='".$avariado."'" :$filtro." and avariado='".$avariado."'";
 
+	  if($rede_publica || $rede_publica!='') $filtro= $filtro==''?" where rede_publica='".$rede_publica."'" :$filtro." and rede_publica='".$rede_publica."'";
+
+	  if($power_edificio || $power_edificio!='') $filtro= $filtro==''?" where power_edificio='".$power_edificio."'" :$filtro." and power_edificio='".$power_edificio."'";
 
       if($data_in && $data_in!='' && $data_out && $data_out!='') $filtro= $filtro==''?" where (create_h_ut between '".$data_in."' and '".$data_out."')" :$filtro." and (create_h_ut between '".$data_in."' and '".$data_out."')";
 

@@ -22,6 +22,8 @@
         $gerador_id = filter_input(INPUT_POST, 'gerador_id');
         $gerador_status = filter_input(INPUT_POST, 'gerador_status');
         $avariado = filter_input(INPUT_POST, 'avariado');
+		$rede_publica = filter_input(INPUT_POST, 'rede_publica');
+		$power_edificio = filter_input(INPUT_POST, 'power_edificio');
         $time = filter_input(INPUT_POST, 'data');
 
         $datas = explode(' - ',$time);
@@ -31,7 +33,7 @@
         $data_out=$datas[1];
 
 
-        $response = $data->filtrar($gerador_id, $gerador_status, $avariado, $data_in, $data_out);
+        $response = $data->filtrar($gerador_id, $gerador_status, $avariado, $rede_publica, $power_edificio, $data_in, $data_out);
 
         echo printAll($response);
 
