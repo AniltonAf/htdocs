@@ -14,6 +14,7 @@ $(document).ready(function () {
 
 
   $.post(controller_gerador, { action: 'getAll' }, function (retorno) {
+    
     let geradores = JSON.parse(retorno);
     let text = '<option value="">Todos</option>'
     for (let item of geradores) {

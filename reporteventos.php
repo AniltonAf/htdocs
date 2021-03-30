@@ -87,7 +87,7 @@ if(!hasRoles(['utilizadores','utilizadores_utilizador','utilizadores_utilizador_
                   <select name="power_edificio" id="" class="form-control form-control-sm">
                     <option value="">Todos</option>
                     <option value="1">SEM ENERGIA</option>
-                    <option value="0">Com ENERGIA</option>
+                    <option value="0">COM ENERGIA</option>
                   </select>
                 </div>
                 <div class="form-group mb-2 mr-3">

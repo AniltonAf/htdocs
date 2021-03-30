@@ -30,8 +30,6 @@ Class Data extends DbConnection{
 
 			$res = $this->db->prepare('SELECT gh.*,g.descricao FROM monogerador.gerador_historico gh join monogerador.gerador g on g.id=gh.gerador_id order by gh.create_h_ut desc');
 
-			//$res->bindValue(':estado',$estado);
-
 			$res->execute();
 
 			return $this->data($res);
@@ -42,7 +40,7 @@ Class Data extends DbConnection{
 	}
 
 
-  function filtrar($gerador_id, $gerador_status, $avariado, $rede_publica, $power_edificio, $data_in, $data_out){
+  function filtrar($gerador_id, $gerador_status, $avariado, $rede_publica, $power_edificio, $qua_aut_trans, $data_in, $data_out){
     try{
 
       $filtro='';
@@ -56,6 +54,8 @@ Class Data extends DbConnection{
 	  if($rede_publica || $rede_publica!='') $filtro= $filtro==''?" where rede_publica='".$rede_publica."'" :$filtro." and rede_publica='".$rede_publica."'";
 
 	  if($power_edificio || $power_edificio!='') $filtro= $filtro==''?" where power_edificio='".$power_edificio."'" :$filtro." and power_edificio='".$power_edificio."'";
+
+	  if($qua_aut_trans || $qua_aut_trans!='') $filtro= $filtro==''?" where qua_aut_trans='".$qua_aut_trans."'" :$filtro." and qua_aut_trans='".$qua_aut_trans."'";
 
       if($data_in && $data_in!='' && $data_out && $data_out!='') $filtro= $filtro==''?" where (create_h_ut between '".$data_in."' and '".$data_out."')" :$filtro." and (create_h_ut between '".$data_in."' and '".$data_out."')";
 
