@@ -53,7 +53,7 @@ if(!hasRoles(['utilizadores','utilizadores_utilizador','utilizadores_utilizador_
             <div class="card-body">
               <form name="filtro" class="form-inline">
                 <div class="form-group mb-2 mr-3">
-                  <label class="mr-2">Gerador</label>
+                  <label class="mr-2">Utilizador</label>
                   <select name="gerador_id" id="" class="form-control form-control-sm">
                     <option value="">Todos</option>
                   </select>
@@ -62,51 +62,19 @@ if(!hasRoles(['utilizadores','utilizadores_utilizador','utilizadores_utilizador_
                   <label class="mr-2">Estado</label>
                   <select name="gerador_status" id="" class="form-control form-control-sm">
                     <option value="">Todos</option>
-                    <option value="1">ON</option>
-                    <option value="0">OFF</option>
+                    <option value="1">Enviado</option>
+                    <option value="0">Não enviado</option>
                   </select>
                 </div>
                 <div class="form-group mb-2 mr-3">
-                  <label class="mr-2">Avaria Gerador</label>
+                  <label class="mr-2">Meio</label>
                   <select name="avariado" id="" class="form-control form-control-sm">
                     <option value="">Todos</option>
-                    <option value="1">AVARIADO</option>
-                    <option value="0">OPERACIONAL</option>
+                    <option value="1">Sms</option>
+                    <option value="0">E-mail</option>
                   </select>
                 </div>
-                <div class="form-group mb-2 mr-3">
-                  <label class="mr-2">Rede Pública</label>
-                  <select name="rede_publica" id="" class="form-control form-control-sm">
-                    <option value="">Todos</option>
-                    <option value="1">CORTE ENERGIA</option>
-                    <option value="0">OPERACIONAL</option>
-                  </select>
-                </div>
-                <div class="form-group mb-2 mr-3">
-                  <label class="mr-2">Agência Energia</label>
-                  <select name="power_edificio" id="" class="form-control form-control-sm">
-                    <option value="">Todos</option>
-                    <option value="1">SEM ENERGIA</option>
-                    <option value="0">COM ENERGIA</option>
-                  </select>
-                </div>
-                <div class="form-group mb-2 mr-3">
-                  <label class="mr-2">QTA</label>
-                  <select name="qua_aut_trans" id="" class="form-control form-control-sm">
-                    <option value="">Todos</option>
-                    <option value="1">AVARIADO</option>
-                    <option value="0">OPERACIONAL</option>
-                  </select>
-                </div>
-                <div class="form-group mb-2 mr-3">
-                  <label class="mr-2">Nível Combustível</label>
-                  <select name="low_fuel" id="" class="form-control form-control-sm">
-                    <option value="">Todos</option>
-                    <option value="1">BAIXO</option>
-                    <option value="0">NORMAL</option>
-                  </select>
-                </div>
-
+               
                 <div class="form-group mb-2 mr-3">
                   <label class="mr-2">Data</label>
                   <input type="text" name="data" value="" class="form-control form-control-sm" style="width: 300px;">

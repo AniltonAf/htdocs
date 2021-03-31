@@ -437,11 +437,7 @@ switch ($action) {
 		$hora_trabalho = filter_input(INPUT_POST, 'hora_trabalho');
 		$ip = filter_input(INPUT_POST, 'ip');
 		$data_manutencao = filter_input(INPUT_POST, 'data_manutencao');
-<<<<<<< HEAD
-		//$ = filter_input(INPUT_POST, '');
-=======
 		$modelo_motor = filter_input(INPUT_POST, 'modelo_motor');
->>>>>>> d0ca78689feeb0ecbfcd5603f27c2bec61ca4a0a
 		$id_grupo = filter_input(INPUT_POST, 'id_grupo');
 		$id = filter_input(INPUT_POST, 'id');
 
