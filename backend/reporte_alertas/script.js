@@ -10,14 +10,16 @@ $(document).ready(function () {
 
   var controller_url = "backend/reporte_alertas/controller";
 
-  var controller_gerador = "backend/gerador/controller";
+  var controller_user = "backend/utilizador/controller";
 
 
-  $.post(controller_gerador, { action: 'getAll' }, function (retorno) {
-    let geradores = JSON.parse(retorno);
+  $.post(controller_user, { action: 'getAll' }, function (retorno) {
+    console.log(retorno);
+
+    let user_send = JSON.parse(retorno);
     let text = '<option value="">Todos</option>'
-    for (let item of geradores) {
-      text += '<option value="' + item.id + '">' + item.descricao + '</option>';
+    for (let item of user_send) {
+      text += '<option value="' + item.user_id + '">' + item.user_nomes + '</option>';
     }
     $('select[name="gerador_id"').html(text)
   })
@@ -79,7 +81,7 @@ $(document).ready(function () {
 
   function getAll() {
     $.post(controller_url, { action: 'list' }, function (retorno) {
-      //console.log(JSON.parse(retorno))
+     //console.log(retorno)
       datatable.DataTable().destroy()
 
       bodyTable.html(retorno);

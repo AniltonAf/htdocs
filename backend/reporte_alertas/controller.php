@@ -13,7 +13,7 @@
 			// Carregar o historico de Eventos ocorridos  nos geradores
 			$response = $data->list();
 
-    //  echo json_encode($response);
+           // echo json_encode($response);
 
 			echo printAll($response);
 
