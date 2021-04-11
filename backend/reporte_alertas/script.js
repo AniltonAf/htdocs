@@ -13,15 +13,14 @@ $(document).ready(function () {
   var controller_user = "backend/utilizador/controller";
 
 
-  $.post(controller_user, { action: 'getAll' }, function (retorno) {
-    console.log(retorno);
+  $.post(controller_user, { action: 'list' }, function (retorno) {
 
     let user_send = JSON.parse(retorno);
     let text = '<option value="">Todos</option>'
     for (let item of user_send) {
-      text += '<option value="' + item.user_id + '">' + item.user_nomes + '</option>';
+      text += '<option value="' + item.id + '">' + item.nome + '</option>';
     }
-    $('select[name="gerador_id"').html(text)
+    $('select[name="user_id"').html(text)
   })
 
   $('input[name="data"]').daterangepicker({
@@ -55,6 +54,7 @@ $(document).ready(function () {
         button.attr('disabled', true);
       },
       success: function (res) {
+        console.log(res)
         button.attr('disabled', false);
         datatable.DataTable().destroy()
 

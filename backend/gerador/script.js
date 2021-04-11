@@ -59,7 +59,8 @@ $(document).ready(function () {
 
     $.post(controller_url, { action: 'detailForm', id: id }, function (response) {
       body.html(response);
-      modal.modal();
+      modal.modal();      
+      getPosionGerador();
     })
 
   })
@@ -87,6 +88,7 @@ $(document).ready(function () {
     $.post(controller_url, { action: 'editForm', id: id }, function (response) {
       body.html(response);
       modal.modal();
+      getPosionGerador();
     })
   })
   //evento submit form edit
@@ -266,12 +268,11 @@ $(document).ready(function () {
       map.resize();
       $('input[name=latitude]').val(15.905888745235975);
       $('input[name=longitude]').val(-24.24721217421829);
-
     });
 
 
     let Marker = new mapboxgl.Marker()
-        .setLngLat([-24.24721217421829, 15.905888745235975])
+        .setLngLat([$('input[name=longitude]').val()?$('input[name=longitude]').val():-24.24721217421829, $('input[name=latitude]').val()?$('input[name=latitude]').val():15.905888745235975])
         .addTo(map);
 
 

@@ -32,7 +32,7 @@ class Data extends DbConnection
 
     try {
 
-      $res = $this->db->prepare('SELECT * FROM monogerador.reporte_alertas ra  order by ra.create_ut desc'); //
+      $res = $this->db->prepare('SELECT * FROM monogerador.reporte_alertas ra where ra.create_ut BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE()  order by ra.create_ut desc'); //
 
       //$res->bindValue(':estado',$estado);
 
@@ -73,28 +73,55 @@ class Data extends DbConnection
   }
 
 
-  function filtrar($gerador_id, $gerador_status, $avariado, $data_in, $data_out)
+  function filtrar($user_id_filtro, $estado, $meio, $data_in, $data_out)
   {
     try {
 
       $filtro = '';
 
-      if ($gerador_id || $gerador_id != '') $filtro = $filtro == '' ? " where gerador_id='" . $gerador_id . "'" : $filtro . " and gerador_id='" . $gerador_id . "'";
+      //if ($estado || $estado != '') $filtro = $filtro == '' ? " where status='" . $estado . "'" : $filtro . " and status='" . $estado . "'";
 
-      if ($gerador_status || $gerador_status != '') $filtro = $filtro == '' ? " where gerador_status='" . $gerador_status . "'" : $filtro . " and gerador_status='" . $gerador_status . "'";
-
-      if ($avariado || $avariado != '') $filtro = $filtro == '' ? " where avariado='" . $avariado . "'" : $filtro . " and avariado='" . $avariado . "'";
+      if ($meio || $meio != '') $filtro = $filtro == '' ? " where tipo='" . $meio . "'" : $filtro . " and tipo='" . $meio . "'";
 
 
-      if ($data_in && $data_in != '' && $data_out && $data_out != '') $filtro = $filtro == '' ? " where (create_h_ut between '" . $data_in . "' and '" . $data_out . "')" : $filtro . " and (create_h_ut between '" . $data_in . "' and '" . $data_out . "')";
+      if ($data_in && $data_in != '' && $data_out && $data_out != '') $filtro = $filtro == '' ? " where (create_ut between '" . $data_in . "' and '" . $data_out . "')" : $filtro . " and (create_ut between '" . $data_in . "' and '" . $data_out . "')";
 
-      $res = $this->db->prepare('SELECT gh.*,g.descricao FROM monogerador.gerador_historico gh join monogerador.gerador g on g.id=gh.gerador_id' . $filtro . ' order by gh.create_h_ut desc');
+      $res = $this->db->prepare('SELECT * FROM monogerador.reporte_alertas ra '.$filtro.' order by ra.create_ut desc');
 
       //$res->bindValue(':estado',$estado);
 
       $res->execute();
 
-      return $this->data($res);
+      $data = array();
+
+      while ($linha = $res->fetch(PDO::FETCH_ASSOC)) {
+        //$data[] = $linha;
+        if ($linha['user_send'] && $linha['user_send'] != 'null' && $linha['user_send'] != '') {
+          $user_state = json_decode($linha['user_send'], true);
+          if (isset($user_state['success']) && ($estado==1 || $estado=='')) {
+            foreach ($user_state['success'] as $user_id) {
+              if ($user_id == $user_id_filtro || $user_id_filtro == '') {
+                $user = $this->getUser($user_id);
+                $linha['user_nome'] = $user['nome'];
+                $linha['user_estado_envio'] = true;
+                $data[] = $linha;
+              }
+            }
+          }
+          if (isset($user_state['fail']) && ($estado==0 || $estado=='')) {
+            foreach ($user_state['fail'] as $user_id) {
+              if ($user_id == $user_id_filtro || $user_id_filtro == '') {
+                $user = $this->getUser($user_id);
+                $linha['user_nome'] = $user['nome'];
+                $linha['user_estado_envio'] = false;
+                $data[] = $linha;
+              }
+            }
+          }
+        }
+      }
+
+      return $data;
     } catch (PDOException $e) {
       echo $e->getMessage();
     }

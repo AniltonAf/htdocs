@@ -11,11 +11,11 @@ session_start();
 
 switch ($action) {
 
-  case 'getAll':
-    $response = $data->list();
+	case 'getAll':
+		$response = $data->list();
 
-    echo json_encode($response);
-    break;
+		echo json_encode($response);
+		break;
 
 	case 'list': //listar geradores
 
@@ -129,7 +129,7 @@ switch ($action) {
 					</div>
 				</div>
 				<div class="col-sm-6">
-				  <div id="map" style="width: 100%; height:100%"></div>
+					<div id="map" style="width: 100%; height:100%"></div>
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Registar</button>
@@ -152,7 +152,7 @@ switch ($action) {
 		$modelo_motor = filter_input(INPUT_POST, 'modelo_motor');
 		$create_ut = date('d-m-y h:i:s');
 		$estado = 1;
-		$response = $data->register($modelo, $fabricante, $descricao, $potencia, $hora_trabalho, $data_manutencao, $id_grupo, $latitude,$longitude,  $estado, $modelo_motor, $create_ut);
+		$response = $data->register($modelo, $fabricante, $descricao, $potencia, $hora_trabalho, $data_manutencao, $id_grupo, $latitude, $longitude,  $estado, $modelo_motor, $create_ut);
 
 		echo json_encode($response);
 
@@ -173,7 +173,7 @@ switch ($action) {
 		<div class="retorno"></div>
 		<form name='edit'>
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 
 					<div class="form-group">
 						<label>Modelo</label>
@@ -206,7 +206,7 @@ switch ($action) {
 					</div>
 
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Potência(KW)</label>
 						<input disabled type="text" class="form-control" value="<?php echo $response['potencia']; ?>" name="potencia" placeholder="Inserir Potencia(KW)" not required>
@@ -217,15 +217,30 @@ switch ($action) {
 						<div class="form-group">
 							<label>Endereço IP</label>
 							<input disabled type="text" class="form-control" value="<?php echo $response['ip']; ?>" name="ip" placeholder="Inserir Endereço IP" not required>
-							<div class="form-group">
-								<label>Data ultima manutenção</label>
-								<input disabled type="date" class="form-control" value="<?php echo $response['data_manutencao']; ?>" name="data_manutencao" placeholder="Inserir Data Ultima Manutenção" required>
-							</div>
+						</div>
+						<div class="form-group">
+							<label>Data ultima manutenção</label>
+							<input disabled type="date" class="form-control" value="<?php echo $response['data_manutencao']; ?>" name="data_manutencao" placeholder="Inserir Data Ultima Manutenção" required>
+						</div>
+
+						<div class="form-group">
+							<label>Latitude <span class="text-danger">*</span></label>
+							<input type="number" disabled step="any" class="form-control" name="latitude" placeholder="Inserir Latitude" value="<?php echo $response['latitude']; ?>" required>
+						</div>
+						<div class="form-group">
+							<label>Longitude <span class="text-danger">*</span></label>
+							<input type="number" disabled step="any" class="form-control" name="longitude" placeholder="Longitude" value="<?php echo $response['longitude']; ?>" required>
 						</div>
 					</div>
 
-					<input type="hidden" name="id" value="<?php echo $response['id']; ?>">
 
+
+					<input type="hidden" name="id" value="<?php echo $response['id']; ?>">
+				</div>
+				<div class="col-sm-6">
+					<div id="map" style="width: 100%; height:100%">AAAAAA</div>
+				</div>
+			</div>
 		</form>
 
 	<?php
@@ -246,7 +261,7 @@ switch ($action) {
 		<div class="retorno"></div>
 		<form name='edit'>
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 
 					<div class="form-group">
 						<label>Modelo<span class="text-danger">*</span></label>
@@ -280,7 +295,7 @@ switch ($action) {
 					</div>
 
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Potência(KW)<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" value="<?php echo $response['potencia']; ?>" name="potencia" placeholder="Inserir Potencia(KW)">
@@ -292,14 +307,25 @@ switch ($action) {
 					<div class="form-group">
 						<label>Endereço IP</label>
 						<input disabled type="text" class="form-control" value="<?php echo $response['ip']; ?>" name="ip" placeholder="Inserir Endereço IP" required>
-						<div class="form-group">
-							<label>Data ultima manutenção</label>
-							<input type="date" class="form-control" value="<?php echo $response['data_manutencao']; ?>" name="data_manutencao" placeholder="Inserir Data Ultima Manutenção" required>
-						</div>
+					</div>
+					<div class="form-group">
+						<label>Data ultima manutenção</label>
+						<input type="date" class="form-control" value="<?php echo $response['data_manutencao']; ?>" name="data_manutencao" placeholder="Inserir Data Ultima Manutenção" required>
+					</div>
+					<div class="form-group">
+						<label>Latitude <span class="text-danger">*</span></label>
+						<input type="number" step="any" class="form-control" name="latitude" placeholder="Inserir Latitude" value="<?php echo $response['latitude']; ?>" required>
+					</div>
+					<div class="form-group">
+						<label>Longitude <span class="text-danger">*</span></label>
+						<input type="number" step="any" class="form-control" name="longitude" placeholder="Longitude" value="<?php echo $response['longitude']; ?>" required>
 					</div>
 
 					<input type="hidden" name="id" value="<?php echo $response['id']; ?>">
 
+				</div>
+				<div class="col-sm-6">
+					<div id="map" style="width: 100%; height:100%"></div>
 				</div>
 
 				<button type="submit" class="btn btn-primary">Registar</button>
@@ -439,9 +465,11 @@ switch ($action) {
 		$data_manutencao = filter_input(INPUT_POST, 'data_manutencao');
 		$modelo_motor = filter_input(INPUT_POST, 'modelo_motor');
 		$id_grupo = filter_input(INPUT_POST, 'id_grupo');
+		$longitude = filter_input(INPUT_POST, 'longitude');
+		$latitude = filter_input(INPUT_POST, 'latitude');
 		$id = filter_input(INPUT_POST, 'id');
 
-		$response = $data->edit($modelo, $fabricante, $descricao, $potencia, $hora_trabalho, $ip, $data_manutencao,$modelo_motor, $id_grupo, $id);
+		$response = $data->edit($modelo, $fabricante, $descricao, $potencia, $hora_trabalho, $ip, $data_manutencao, $modelo_motor, $id_grupo, $id, $longitude, $latitude);
 
 		echo json_encode($response);
 

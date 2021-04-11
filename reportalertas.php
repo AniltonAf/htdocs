@@ -54,13 +54,13 @@ if(!hasRoles(['utilizadores','utilizadores_utilizador','utilizadores_utilizador_
               <form name="filtro" class="form-inline">
                 <div class="form-group mb-2 mr-3">
                   <label class="mr-2">Utilizador</label>
-                  <select name="gerador_id" id="" class="form-control form-control-sm">
+                  <select name="user_id" id="" class="form-control form-control-sm">
                     <option value="">Todos</option>
                   </select>
                 </div>
                 <div class="form-group mb-2 mr-3">
                   <label class="mr-2">Estado</label>
-                  <select name="gerador_status" id="" class="form-control form-control-sm">
+                  <select name="estado" id="" class="form-control form-control-sm">
                     <option value="">Todos</option>
                     <option value="1">Enviado</option>
                     <option value="0">Não enviado</option>
@@ -68,10 +68,10 @@ if(!hasRoles(['utilizadores','utilizadores_utilizador','utilizadores_utilizador_
                 </div>
                 <div class="form-group mb-2 mr-3">
                   <label class="mr-2">Meio</label>
-                  <select name="avariado" id="" class="form-control form-control-sm">
+                  <select name="meio" id="" class="form-control form-control-sm">
                     <option value="">Todos</option>
-                    <option value="1">Sms</option>
-                    <option value="0">E-mail</option>
+                    <option value="sms">Sms</option>
+                    <option value="email">E-mail</option>
                   </select>
                 </div>
                

@@ -28,7 +28,7 @@ Class Data extends DbConnection{
 
 		try{
 
-			$res = $this->db->prepare('SELECT gh.*,g.descricao FROM monogerador.gerador_historico gh join monogerador.gerador g on g.id=gh.gerador_id order by gh.create_h_ut desc');
+			$res = $this->db->prepare('SELECT gh.*,g.descricao FROM monogerador.gerador_historico gh join monogerador.gerador g on g.id=gh.gerador_id where gh.create_h_ut BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() order by gh.create_h_ut desc');
 
 			$res->execute();
 

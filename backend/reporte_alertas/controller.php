@@ -21,9 +21,9 @@
 
       case 'filtrar':
 
-        $gerador_id = filter_input(INPUT_POST, 'gerador_id');
-        $gerador_status = filter_input(INPUT_POST, 'gerador_status');
-        $avariado = filter_input(INPUT_POST, 'avariado');
+        $user_id_filtro = filter_input(INPUT_POST, 'user_id');
+        $estado = filter_input(INPUT_POST, 'estado');
+        $meio = filter_input(INPUT_POST, 'meio');
         $time = filter_input(INPUT_POST, 'data');
 
         $datas = explode(' - ',$time);
@@ -33,7 +33,7 @@
         $data_out=$datas[1];
 
 
-        $response = $data->filtrar($gerador_id, $gerador_status, $avariado, $data_in, $data_out);
+        $response = $data->filtrar($user_id_filtro, $estado, $meio, $data_in, $data_out);
 
         echo printAll($response);
 

@@ -156,11 +156,11 @@ Class Data extends DbConnection{
 		return $response;
 	}
 	// função para editar gerador
-	public function edit($modelo, $fabricante, $descricao, $potencia, $hora_trabalho, $ip, $data_manutencao,$modelo_motor, $id_grupo, $id){
+	public function edit($modelo, $fabricante, $descricao, $potencia, $hora_trabalho, $ip, $data_manutencao,$modelo_motor, $id_grupo, $id,$longitude,$latitude){
 		$response=array();
 		try{
 
-			$res = $this->db->prepare('UPDATE gerador SET modelo=:modelo,fabricante=:fabricante,descricao=:descricao,potencia=:potencia,hora_trabalho=:hora_trabalho,ip=:ip,data_manutencao=:data_manutencao,modelo_motor=:modelo_motor,id_grupo=:id_grupo WHERE id=:id');
+			$res = $this->db->prepare('UPDATE gerador SET modelo=:modelo,fabricante=:fabricante,descricao=:descricao,potencia=:potencia,hora_trabalho=:hora_trabalho,ip=:ip,data_manutencao=:data_manutencao,modelo_motor=:modelo_motor,id_grupo=:id_grupo, latitude=:latitude,longitude=:longitude WHERE id=:id');
 
 			$res->bindValue(':modelo',$modelo);
 			$res->bindValue(':fabricante',$fabricante);
@@ -172,6 +172,8 @@ Class Data extends DbConnection{
 			$res->bindValue(':modelo_motor',$modelo_motor);
 			$res->bindValue(':id_grupo',$id_grupo);
 			$res->bindValue(':id',$id);
+			$res->bindValue(':latitude',$latitude);
+			$res->bindValue(':longitude',$longitude);
 
 			$res->execute();
 
