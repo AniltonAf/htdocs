@@ -404,7 +404,7 @@ $(document).ready(function () {
   // teste som
   function alertson() {
     var snd = new Audio('../dist/son/alert.mp3');
-    snd.onended = function () { alert("Notificação recebida"); };
+    snd.onended = function () { alert("Notificação recebida 99"); };
     snd.play();
   }
 
