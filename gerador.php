@@ -56,7 +56,7 @@ if(!hasRoles(['equipamentos','equipamentos_gerador','equipamentos_gerador_adicio
                       <th>Modelo</th>
                       <th>Fabricante</th>
                       <th>Descrição</th>
-                      <th>Unidade Organica</th>
+                      <th>Unidade Orgânica</th>
                       <th>Estado</th>
                       <th>Ações</th>
                     </tr>

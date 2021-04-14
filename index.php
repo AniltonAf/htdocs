@@ -95,7 +95,7 @@
                       <span class="badge badge-danger"><i class="fas fa-power-off"></i> <span class="qua_aut_trans_off"></span></span>
                     </div>
                   </div>
-                  <p>QAT</p>
+                  <p>QTA</p>
                 </div>
                 <div class="icon" style="color:Lightblue"><i class="fas fa-bolt"></i></div>
                 <a href="#" class="small-box-footer bg-info">
@@ -168,7 +168,7 @@
                         <select id="chart_estado_select" style="border: none;">
                           <option value="1">Estado Geradores</option>
                           <option value="2">Estado Rede Publica</option>
-                          <option value="3">Estado QAT</option>
+                          <option value="3">Estado QTA</option>
                         </select>
                       </h3>
                       <div class="card-tools">
@@ -187,7 +187,7 @@
                       <h3 class="card-title">Top 10
                         <select name="" id="chart_top_10_select" style="border: none;">
                           <option value="1">Gerador Avariado</option>
-                          <option value="2">Avaria no QAT</option>
+                          <option value="2">Avaria no QTA</option>
                           <option value="3">Avaria na Rede publica</option>
                         </select>
                       </h3>
